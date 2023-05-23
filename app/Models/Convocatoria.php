@@ -13,4 +13,19 @@ class Convocatoria extends Model
     {
         return $this->hasMany(Conv_base::class);
     }
+
+    public function entrevista()
+    {
+        return $this->hasMany(Entrevista::class);
+    }
+
+    public function result_cv()
+    {
+        return $this->hasMany(Result_cv::class);
+    }
+
+    public function resultado()
+    {
+        return $this->hasMany(Resultado::class);
+    }
 }

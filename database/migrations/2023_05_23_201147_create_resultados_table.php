@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('result_cvs', function (Blueprint $table) {
+        Schema::create('resultados', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('archivo');
             $table->foreignId('convocatoria_id')->nullable()->constrained('convocatorias');
             $table->timestamps();
-            //$table->foreign('convocatoria_id')->references('id')->on('convocatorias');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('result_cvs');
+        Schema::dropIfExists('resultados');
     }
 };

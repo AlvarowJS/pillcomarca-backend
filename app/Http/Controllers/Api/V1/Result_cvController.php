@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Convocatoria;
+use App\Models\Result_cv;
 use Illuminate\Http\Request;
 
-class ConvocatoriaController extends Controller
+class Result_cvController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $datos = Convocatoria::with('conv_base', 'entrevista', 'result_cv', 'resultado')->get();
+        $datos = Result_cv::all();
         return response()->json($datos);
     }
 
@@ -22,23 +22,23 @@ class ConvocatoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $convocatoria = new Convocatoria;
-        $convocatoria->nombre = $request->nombre;
-        $convocatoria->estado = $request->estado;
-        $convocatoria->save();
-        return response()->json($convocatoria);
+        $result = new Result_cv;
+        $result->nombre = $request->nombre;
+        $result->archivo = $request->archivo;
+        $result->convocatoria_id = $request->convocatoria_id;
+        $result->save();
+        return response()->json($result);
     }
-
-
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $datos = Convocatoria::find($id);
-        if (!$datos) {
+        $datos= Result_cv::find($id);
+        if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
+
         }
         return response()->json($datos);
     }
@@ -48,14 +48,15 @@ class ConvocatoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $convocatoria = Convocatoria::find($id);
-        if (!$convocatoria) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
+        $result = Result_cv::find($id);
+        if(!$result) {
+            return response()->json(['message' =>'Registro no encontrado0'], 404);
         }
-        $convocatoria->nombre = $request->nombre;
-        $convocatoria->estado = $request->estado;
-        $convocatoria->save();
-        return response()->json($convocatoria);
+        $result->nombre= $request->nombre;
+        $result->archivo= $request->archivo;
+        $result->convocatoria_id = $request->convocatoria_id;
+        $result->save();
+        return response()->json($result);
     }
 
     /**
@@ -63,8 +64,8 @@ class ConvocatoriaController extends Controller
      */
     public function destroy($id)
     {
-        $datos = Convocatoria::find($id);
-        if (!$datos) {
+        $datos = Result_cv::find($id);
+        if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
         $datos->delete();

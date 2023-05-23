@@ -3,42 +3,41 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Convocatoria;
+use App\Models\Entrevista;
 use Illuminate\Http\Request;
 
-class ConvocatoriaController extends Controller
+class EntrevistaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $datos = Convocatoria::with('conv_base', 'entrevista', 'result_cv', 'resultado')->get();
-        return response()->json($datos);
-    }
+        $datos = Entrevista::all();
+        return response()->json($datos);    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $convocatoria = new Convocatoria;
-        $convocatoria->nombre = $request->nombre;
-        $convocatoria->estado = $request->estado;
-        $convocatoria->save();
-        return response()->json($convocatoria);
+        $entrevista = new Entrevista;
+        $entrevista->nombre = $request->nombre;
+        $entrevista->archivo = $request->archivo;
+        $entrevista->convocatoria_id = $request->convocatoria_id;
+        $entrevista->save();
+        return response()->json($entrevista);
     }
-
-
 
     /**
      * Display the specified resource.
      */
     public function show($id)
     {
-        $datos = Convocatoria::find($id);
-        if (!$datos) {
+        $datos= Entrevista::find($id);
+        if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
+
         }
         return response()->json($datos);
     }
@@ -48,14 +47,15 @@ class ConvocatoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $convocatoria = Convocatoria::find($id);
-        if (!$convocatoria) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
+        $entrevista = Entrevista::find($id);
+        if(!$entrevista) {
+            return response()->json(['message' =>'Registro no encontrado0'], 404);
         }
-        $convocatoria->nombre = $request->nombre;
-        $convocatoria->estado = $request->estado;
-        $convocatoria->save();
-        return response()->json($convocatoria);
+        $entrevista->nombre= $request->nombre;
+        $entrevista->archivo= $request->archivo;
+        $entrevista->convocatoria_id = $request->convocatoria_id;
+        $entrevista->save();
+        return response()->json($entrevista);
     }
 
     /**
@@ -63,8 +63,8 @@ class ConvocatoriaController extends Controller
      */
     public function destroy($id)
     {
-        $datos = Convocatoria::find($id);
-        if (!$datos) {
+        $datos = Entrevista::find($id);
+        if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
         $datos->delete();
