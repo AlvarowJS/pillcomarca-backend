@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\GestionController as Gestion;
 use App\Http\Controllers\Api\V1\GestiondetalleController as Gestiondetalle;
 use App\Http\Controllers\Api\V1\TipodedocumentoController as Tipodedocumento;
 use App\Http\Controllers\Api\V1\DocumentonormativaController as Documentonormativa;
+use App\Http\Controllers\Api\V1\SeguridadController as Seguridad;
 
 
 /*
@@ -38,4 +39,5 @@ Route::apiResource('/v1/gestion', Gestion::class);
 Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
 Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
 Route::apiResource('/v1/documentonormativa', Documentonormativa::class);
+Route::apiResource('/v1/seguridad', Seguridad::class);
 
