@@ -3,39 +3,40 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Entrevista;
+use App\Models\Gestion;
+use App\Models\Gestiondetalle;
 use Illuminate\Http\Request;
 
-class EntrevistaController extends Controller
+class GestiondetalleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
-        $datos = Entrevista::all();
-        return response()->json($datos);   
-     }
+        $datos = Gestiondetalle::all();
+        return response()->json($datos);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+     public function store(Request $request)
     {
-        $entrevista = new Entrevista;
-        $entrevista->nombre = $request->nombre;
-        $entrevista->archivo = $request->archivo;
-        $entrevista->convocatoria_id = $request->convocatoria_id;
-        $entrevista->save();
-        return response()->json($entrevista);
+        $result = new Gestiondetalle;
+        $result->nombre = $request->nombre;
+        $result->link = $request->link;
+        $result->gestion_id = $request->gestion_id;
+        $result->save();
+        return response()->json($result);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+     public function show($id)
     {
-        $datos= Entrevista::find($id);
+        $datos= Gestiondetalle::find($id);
         if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
 
@@ -48,15 +49,15 @@ class EntrevistaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $entrevista = Entrevista::find($id);
-        if(!$entrevista) {
+        $result = Gestiondetalle::find($id);
+        if(!$result) {
             return response()->json(['message' =>'Registro no encontrado0'], 404);
         }
-        $entrevista->nombre= $request->nombre;
-        $entrevista->archivo= $request->archivo;
-        $entrevista->convocatoria_id = $request->convocatoria_id;
-        $entrevista->save();
-        return response()->json($entrevista);
+        $result->nombre= $request->nombre;
+        $result->link= $request->link;
+        $result->gestion_id = $request->gestion_id;
+        $result->save();
+        return response()->json($result);
     }
 
     /**
@@ -64,7 +65,7 @@ class EntrevistaController extends Controller
      */
     public function destroy($id)
     {
-        $datos = Entrevista::find($id);
+        $datos = Gestiondetalle::find($id);
         if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }

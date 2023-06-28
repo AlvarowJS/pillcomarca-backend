@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Entrevista;
+use App\Models\Documentonormativa;
 use Illuminate\Http\Request;
 
-class EntrevistaController extends Controller
+class DocumentonormativaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
     {
-        $datos = Entrevista::all();
+        $datos = Documentonormativa::all();
         return response()->json($datos);   
      }
 
@@ -22,12 +21,14 @@ class EntrevistaController extends Controller
      */
     public function store(Request $request)
     {
-        $entrevista = new Entrevista;
-        $entrevista->nombre = $request->nombre;
-        $entrevista->archivo = $request->archivo;
-        $entrevista->convocatoria_id = $request->convocatoria_id;
-        $entrevista->save();
-        return response()->json($entrevista);
+        $documento = new Documentonormativa;
+        $documento->nombre = $request->nombre;
+        $documento->fecha = $request->fecha;
+        $documento->descripcion = $request->descripcion;
+        $documento->archivo = $request->archivo;
+        $documento->tipodedocumento_id = $request->tipodedocumento_id;
+        $documento->save();
+        return response()->json($documento);
     }
 
     /**
@@ -35,7 +36,7 @@ class EntrevistaController extends Controller
      */
     public function show($id)
     {
-        $datos= Entrevista::find($id);
+        $datos= Documentonormativa::find($id);
         if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
 
@@ -48,15 +49,17 @@ class EntrevistaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $entrevista = Entrevista::find($id);
-        if(!$entrevista) {
+        $documento = Documentonormativa::find($id);
+        if(!$documento) {
             return response()->json(['message' =>'Registro no encontrado0'], 404);
         }
-        $entrevista->nombre= $request->nombre;
-        $entrevista->archivo= $request->archivo;
-        $entrevista->convocatoria_id = $request->convocatoria_id;
-        $entrevista->save();
-        return response()->json($entrevista);
+        $documento->nombre= $request->nombre;
+        $documento->fecha = $request->fecha;
+        $documento->descripcion = $request->descripcion;
+        $documento->archivo = $request->archivo;
+        $documento->tipodedocumento_id = $request->tipodedocumento_id;
+        $documento->save();
+        return response()->json($documento);
     }
 
     /**
@@ -64,7 +67,7 @@ class EntrevistaController extends Controller
      */
     public function destroy($id)
     {
-        $datos = Entrevista::find($id);
+        $datos = Documentonormativa::find($id);
         if(!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
