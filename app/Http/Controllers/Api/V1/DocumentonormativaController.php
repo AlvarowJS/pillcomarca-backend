@@ -11,6 +11,7 @@ class DocumentonormativaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function index()
     {
         $datos = Documentonormativa::all();
         return response()->json($datos);   

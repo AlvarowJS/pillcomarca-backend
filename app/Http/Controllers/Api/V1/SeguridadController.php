@@ -13,7 +13,7 @@ class SeguridadController extends Controller
      */
     public function index()
     {
-        $datos = Seguridad::with()->get();
+        $datos = Seguridad::all();
         return response()->json($datos);
     }
 
