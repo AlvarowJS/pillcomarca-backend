@@ -13,7 +13,7 @@ class DocumentonormativaController extends Controller
      */
     public function index()
     {
-        $datos = Documentonormativa::all();
+        $datos = Documentonormativa::with('Tipodedocumento')->get();
         return response()->json($datos);   
      }
 

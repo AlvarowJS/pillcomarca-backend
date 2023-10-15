@@ -13,7 +13,7 @@ class TipodedocumentoController extends Controller
      */
     public function index()
     {
-        $datos = Tipodedocumento::with('documentonormativa')->get();
+        $datos = Tipodedocumento::all();
         return response()->json($datos);
     }
 
@@ -46,7 +46,7 @@ class TipodedocumentoController extends Controller
       public function update(Request $request, $id)
     {
         $tipo = Tipodedocumento::find($id);
-        if (!$convocatoria) {
+        if (!$tipo) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }
         $tipo->nombre = $request->nombre;

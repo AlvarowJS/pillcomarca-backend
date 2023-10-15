@@ -1,0 +1,26 @@
+created:
+    - database/factories/SeguridadArchivoFactory.php
+    - database/factories/SeguridadColeccionFactory.php
+    - database/factories/SeguridadCategoriaFactory.php
+    - database/migrations/2023_10_13_163930_create_seguridad_archivos_table.php
+    - database/migrations/2023_10_13_163931_create_seguridad_coleccions_table.php
+    - database/migrations/2023_10_13_163932_create_seguridad_categorias_table.php
+    - app/Models/Seguridad_archivo.php
+    - app/Models/Seguridad_coleccion.php
+    - app/Models/Seguridad_categoria.php
+models:
+    Conv_base: {  }
+    Convocatoria: {  }
+    Documentonormativa: {  }
+    Entrevista: {  }
+    Gestion: {  }
+    Gestiondetalle: {  }
+    Post: {  }
+    Result_cv: {  }
+    Resultado: {  }
+    Seguridad: {  }
+    Tipodedocumento: {  }
+    User: {  }
+    Seguridad_archivo: { nombre_archivo: string, documento: longtext, seguridad_coleccion_id: id }
+    Seguridad_coleccion: { nombre_coleccion: string, seguridad_categoria_id: id, relationships: { hasMany: Seguridad_archivo } }
+    Seguridad_categoria: { categoria: string, relationships: { hasMany: Seguridad_coleccion } }

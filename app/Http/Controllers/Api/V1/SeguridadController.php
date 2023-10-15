@@ -3,71 +3,43 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Seguridad;
+use App\Models\SeguridadArchivo;
+use App\Models\SeguridadCategoria;
+use App\Models\SeguridadColeccion;
 use Illuminate\Http\Request;
 
 class SeguridadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Publico
     public function index()
     {
-        $datos = Seguridad::all();
+        $datos = SeguridadCategoria::all();
         return response()->json($datos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // Privado
+    public function crearArchivo(Request $request)
     {
-        $seguridad = new Seguridad;
-        $seguridad->nombre = $request->nombre;
-        $seguridad->fecha = $request->fecha;
-        $seguridad->archivo = $request->archivo;
-        $seguridad->save();
-        return response()->json($seguridad);
+        $archivo = new SeguridadArchivo;
+        $archivo->nombre_archivo = $request->nombre;
+        $archivo->documento = $request->documento;
+        $archivo->seguridad_coleccion_id = $request->seguridad_coleccion_id;
+        $archivo->save();
+        return response()->json($archivo);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function crearColeccion(Request $request)
     {
-        $datos = Seguridad::find($id);
-        if (!$datos) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
-        }
-        return response()->json($datos);
+        $coleccion = new SeguridadColeccion;
+        $coleccion->nombre_coleccion = $request->nombre_coleccion;
+        $coleccion->seguridad_categoria_id = $request->seguridad_categoria_id;
+        $coleccion->save();
+        return response()->json($coleccion);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+    public function crearCategoria(Request $request)
     {
-        $seguridad = Seguridad::find($id);
-        if (!$seguridad) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
-        }
-        $seguridad->nombre = $request->nombre;
-        $seguridad->fecha = $request->fecha;
-        $seguridad->archivo = $request->archivo;
-        $seguridad->save();
-        return response()->json($seguridad);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        $datos = Seguridad::find($id);
-        if (!$datos) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
-        }
-        $datos->delete();
-        return response()->json(['message' => 'Registro eliminado']);
+        $categoria = new SeguridadCategoria;
+        $categoria->categoria = $request->categoria;
+        $categoria->save();
+        return response()->json($categoria);
     }
 }

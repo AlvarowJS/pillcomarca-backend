@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tipodedocumento extends Model
 {
     use HasFactory;
-    public function Documentonormativa()
-    {
-        return $this->hasMany(Documentonormativa::class);
-    }
+    // public function Documentonormativa()
+    // {
+    //     return $this->hasMany(Documentonormativa::class);
+    // }
 }

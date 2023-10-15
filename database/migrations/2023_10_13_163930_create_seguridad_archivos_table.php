@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('noticias', function (Blueprint $table) {
+        Schema::create('seguridad_archivos', function (Blueprint $table) {
             $table->id();
-            $table-> string('titulo');
-            $table-> date('fecha');
-            $table-> text('nota');
-            $table-> string('referencia');
+            $table->string('nombre_archivo');
+            $table->longText('documento');
+            $table->unsignedBigInteger('seguridad_coleccion_id');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('noticias');
+        Schema::dropIfExists('seguridad_archivos');
     }
 };
