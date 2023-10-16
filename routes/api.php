@@ -42,12 +42,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/gestion', Gestion::class);
     Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
-    Route::apiResource('/v1/documentonormativa', Documentonormativa::class);
+    // Route::apiResource('/v1/documentonormativa', Documentonormativa::class);
     Route::apiResource('/v1/seguridad', Seguridad::class);
-
     Route::post('/v1/seguridad-archivo', [Seguridad::class, 'crearArchivo']);
     Route::post('/v1/seguridad-coleccion', [Seguridad::class, 'crearColeccion']);
     Route::post('/v1/seguridad-categoria', [Seguridad::class, 'crearCategoria']);
+
+
 
 });
 
@@ -56,4 +57,5 @@ Route::get('/v1/convocatoria', [Convocatoria::class, 'index']);
 Route::get('/v1/gestion', [Gestion::class, 'index']);
 Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
 Route::get('/v1/documentonormativa', [Documentonormativa::class, 'index']);
+Route::get('/v1/documentonormativa/{documentonormativa}', [Documentonormativa::class, 'show']);
 Route::get('/v1/seguridad', [Seguridad::class, 'index']);

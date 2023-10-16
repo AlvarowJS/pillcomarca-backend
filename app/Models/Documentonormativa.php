@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Documentonormativa extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre',
+        'fecha',
+        'descripcion',
+        'archivo',
+        'tipodedocumento_id'
+
+    ];
+    protected $casts = [
+        'id' => 'integer',
+    ];
 
      public function Tipodedocumento()
     {

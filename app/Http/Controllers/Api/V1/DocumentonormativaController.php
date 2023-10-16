@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\DocumentonormativaCollection;
+use App\Http\Resources\V1\DocumentonormativaResource;
 use App\Models\Documentonormativa;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,8 @@ class DocumentonormativaController extends Controller
     public function index()
     {
         $datos = Documentonormativa::with('Tipodedocumento')->get();
-        return response()->json($datos);   
+        return DocumentonormativaCollection::make($datos);
+        // return response()->json($datos);
      }
 
     /**
@@ -35,14 +38,16 @@ class DocumentonormativaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Documentonormativa $documentonormativa)
     {
-        $datos= Documentonormativa::find($id);
-        if(!$datos) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
+        // return "hola";
+        return DocumentonormativaResource::make($documentonormativa);
+        // $datos= Documentonormativa::find($id);
+        // if(!$datos) {
+        //     return response()->json(['message' => 'Registro no encontrado'], 404);
 
-        }
-        return response()->json($datos);
+        // }
+        // return response()->json($datos);
     }
 
     /**
