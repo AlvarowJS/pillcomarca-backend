@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Exceptions\ShowItemException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\DocumentonormativaCollection;
 use App\Http\Resources\V1\DocumentonormativaResource;
 use App\Models\Documentonormativa;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class DocumentonormativaController extends Controller
 {
@@ -17,8 +19,7 @@ class DocumentonormativaController extends Controller
     {
         $datos = Documentonormativa::with('Tipodedocumento')->get();
         return DocumentonormativaCollection::make($datos);
-        // return response()->json($datos);
-     }
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,16 +39,15 @@ class DocumentonormativaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Documentonormativa $documentonormativa)
+    // public function show(Documentonormativa $documentonormativa)
+    public function show($id): JsonResource
     {
-        // return "hola";
-        return DocumentonormativaResource::make($documentonormativa);
-        // $datos= Documentonormativa::find($id);
-        // if(!$datos) {
-        //     return response()->json(['message' => 'Registro no encontrado'], 404);
-
-        // }
-        // return response()->json($datos);
+        $documentos = Documentonormativa::where('id', $id)
+            ->first();
+        if (!$documentos) {
+            return throw new ShowItemException();
+        }
+        return DocumentonormativaResource::make($documentos);
     }
 
     /**
@@ -56,10 +56,10 @@ class DocumentonormativaController extends Controller
     public function update(Request $request, $id)
     {
         $documento = Documentonormativa::find($id);
-        if(!$documento) {
-            return response()->json(['message' =>'Registro no encontrado0'], 404);
+        if (!$documento) {
+            return throw new ShowItemException();
         }
-        $documento->nombre= $request->nombre;
+        $documento->nombre = $request->nombre;
         $documento->fecha = $request->fecha;
         $documento->descripcion = $request->descripcion;
         $documento->archivo = $request->archivo;
@@ -74,8 +74,8 @@ class DocumentonormativaController extends Controller
     public function destroy($id)
     {
         $datos = Documentonormativa::find($id);
-        if(!$datos) {
-            return response()->json(['message' => 'Registro no encontrado'], 404);
+        if (!$datos) {
+            return throw new ShowItemException();
         }
         $datos->delete();
         return response()->json(['message' => 'Registro eliminado']);

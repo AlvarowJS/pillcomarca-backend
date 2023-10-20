@@ -16,13 +16,14 @@ models:
       hasMany: Seguridad_coleccion
 
   Dependencia:
-    nombre_dependencia: string
-    estado: boolean
+    nombre_dependencia: string    
   
   Cargo:
     nombre_cargo: string
     estado: boolean
-  
+    dependencia_id: id
+    relationships:
+      hasMany: Dependencia
   
 
   
