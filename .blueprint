@@ -2,12 +2,18 @@ created:
     - database/factories/SeguridadArchivoFactory.php
     - database/factories/SeguridadColeccionFactory.php
     - database/factories/SeguridadCategoriaFactory.php
-    - database/migrations/2023_10_13_163930_create_seguridad_archivos_table.php
-    - database/migrations/2023_10_13_163931_create_seguridad_coleccions_table.php
-    - database/migrations/2023_10_13_163932_create_seguridad_categorias_table.php
+    - database/factories/DependenciaFactory.php
+    - database/factories/CargoFactory.php
+    - database/migrations/2023_10_23_203358_create_seguridad_archivos_table.php
+    - database/migrations/2023_10_23_203359_create_seguridad_coleccions_table.php
+    - database/migrations/2023_10_23_203400_create_seguridad_categorias_table.php
+    - database/migrations/2023_10_23_203401_create_dependencias_table.php
+    - database/migrations/2023_10_23_203402_create_cargos_table.php
     - app/Models/Seguridad_archivo.php
     - app/Models/Seguridad_coleccion.php
     - app/Models/Seguridad_categoria.php
+    - app/Models/Dependencia.php
+    - app/Models/Cargo.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -24,3 +30,5 @@ models:
     Seguridad_archivo: { nombre_archivo: string, documento: longtext, seguridad_coleccion_id: id }
     Seguridad_coleccion: { nombre_coleccion: string, seguridad_categoria_id: id, relationships: { hasMany: Seguridad_archivo } }
     Seguridad_categoria: { categoria: string, relationships: { hasMany: Seguridad_coleccion } }
+    Dependencia: { nombre_dependencia: string }
+    Cargo: { nombre_cargo: string, estado: boolean, dependencia_id: id, relationships: { hasMany: Dependencia } }
