@@ -4,25 +4,25 @@ created:
     - database/factories/SeguridadCategoriaFactory.php
     - database/factories/DependenciaFactory.php
     - database/factories/CargoFactory.php
-    - database/factories/NoticiaCateogoriaFactory.php
     - database/factories/NoticiaImagenesFactory.php
     - database/factories/NoticiaFactory.php
-    - database/migrations/2023_10_31_135754_create_seguridad_archivos_table.php
-    - database/migrations/2023_10_31_135755_create_seguridad_coleccions_table.php
-    - database/migrations/2023_10_31_135756_create_seguridad_categorias_table.php
-    - database/migrations/2023_10_31_135757_create_dependencias_table.php
-    - database/migrations/2023_10_31_135758_create_cargos_table.php
-    - database/migrations/2023_10_31_135759_create_noticia_cateogorias_table.php
-    - database/migrations/2023_10_31_135800_create_noticia_imagenes_table.php
-    - database/migrations/2023_10_31_135801_create_noticias_table.php
+    - database/factories/NoticiaCategoriaFactory.php
+    - database/migrations/2023_10_31_193345_create_seguridad_archivos_table.php
+    - database/migrations/2023_10_31_193346_create_seguridad_coleccions_table.php
+    - database/migrations/2023_10_31_193347_create_seguridad_categorias_table.php
+    - database/migrations/2023_10_31_193348_create_dependencias_table.php
+    - database/migrations/2023_10_31_193349_create_cargos_table.php
+    - database/migrations/2023_10_31_193350_create_noticia_imagenes_table.php
+    - database/migrations/2023_10_31_193351_create_noticias_table.php
+    - database/migrations/2023_10_31_193352_create_noticia_categorias_table.php
     - app/Models/Seguridad_archivo.php
     - app/Models/Seguridad_coleccion.php
     - app/Models/Seguridad_categoria.php
     - app/Models/Dependencia.php
     - app/Models/Cargo.php
-    - app/Models/Noticia_cateogoria.php
     - app/Models/Noticia_imagenes.php
     - app/Models/Noticia.php
+    - app/Models/Noticia_categoria.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -42,5 +42,6 @@ models:
     Dependencia: { nombre_dependencia: string, relationships: { hasMany: Cargo } }
     Cargo: { nombre_cargo: string, estado: boolean, dependencia_id: id }
     Noticia_cateogoria: { titulo: nombre_categoria, relationships: { hasMany: Noticia } }
-    Noticia_imagenes: { imagen: text, relationships: { hasMany: Noticia } }
-    Noticia: { titulo: string, fecha: date, nota: text, referendcia: text, user_id: id, categoria_id: id }
+    Noticia_imagenes: { imagen: text, noticia_id: id }
+    Noticia: { titulo: string, fecha: date, nota: text, referendcia: text, user_id: id, categoria_id: id, relationships: { hasMany: Noticia_imagenes } }
+    Noticia_categoria: { nombre_categoria: string, relationships: { hasMany: Noticia } }

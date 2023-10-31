@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class NoticiaImagenes extends Model
+class NoticiaCategoria extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class NoticiaImagenes extends Model
      * @var array
      */
     protected $fillable = [
-        'imagen',
+        'nombre_categoria',
     ];
 
     /**
