@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Cargo extends Model
+class Noticia extends Model
 {
     use HasFactory;
 
@@ -16,9 +16,12 @@ class Cargo extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_cargo',
-        'estado',
-        'dependencia_id',
+        'titulo',
+        'fecha',
+        'nota',
+        'referendcia',
+        'user_id',
+        'categoria_id',
     ];
 
     /**
@@ -28,12 +31,18 @@ class Cargo extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'estado' => 'boolean',
-        'dependencia_id' => 'integer',
+        'fecha' => 'date',
+        'user_id' => 'integer',
+        'categoria_id' => 'integer',
     ];
 
-    public function dependencia(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Dependencia::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function categoria(): BelongsTo
+    {
+        return $this->belongsTo(Categoria::class);
     }
 }

@@ -16,13 +16,13 @@ return new class extends Migration
             $table->foreignId('role_id')->nullable()->constrained('roles');
             $table->foreignId('cargo_id')->nullable()->constrained('cargos');
             $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('cargo');
-            $table->string('gerencia');
+            $table->string('apellidos');           
             $table->string('celular');
+            $table->string('dni');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('estado');
             $table->rememberToken();
             $table->timestamps();
         });

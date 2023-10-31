@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Dependencia extends Model
+class NoticiaCateogoria extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Dependencia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_dependencia',
+        'titulo',
     ];
 
     /**
@@ -28,8 +28,8 @@ class Dependencia extends Model
         'id' => 'integer',
     ];
 
-    public function cargos(): HasMany
+    public function noticias(): HasMany
     {
-        return $this->hasMany(Cargo::class);
+        return $this->hasMany(Noticia::class);
     }
 }

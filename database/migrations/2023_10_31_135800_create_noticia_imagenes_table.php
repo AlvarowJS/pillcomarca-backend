@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrevistas', function (Blueprint $table) {
+        Schema::create('noticia_imagenes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('archivo');
-            $table->foreignId('convocatoria_id')->nullable()->constrained('convocatorias');
+            $table->text('imagen');
             $table->timestamps();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrevistas');
+        Schema::dropIfExists('noticia_imagenes');
     }
 };

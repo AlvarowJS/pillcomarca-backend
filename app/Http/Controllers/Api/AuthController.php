@@ -11,22 +11,41 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function registerAdmin(Request $request)
     {
         $user = User::create([
-            'name' => $request->name,
-            'role_id' => 3,
-            'cargo' => $request->cargo,
-            'area' => $request->area,
-            'celular' => $request->celular,
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'celular' => $request->celular,                        
+            'dni' => $request->dni,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => 1,
+            'cargo_id' => $request->cargo_id,
+            'estado' => true
+        ]);
+        return response()->json([
+            'message' => 'Administrador creado exitosamente.',
+            'user' => $user,
+        ], 201);
+    }
+    public function registerUser(Request $request)
+    {
+        $user = User::create([
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'celular' => $request->celular,                        
+            'dni' => $request->dni,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+                     
         ]);
         return response()->json([
             'message' => 'Usuario creado exitosamente.',
             'user' => $user,
         ], 201);
     }
+
     public function login(Request $request)
     {
         $request->validate([

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('noticias', function (Blueprint $table) {
             $table->id();
-            $table-> string('titulo');
-            $table-> date('fecha');
-            $table-> text('nota');
-            $table-> string('referencia');
+            $table->string('titulo');
+            $table->date('fecha');
+            $table->text('nota');
+            $table->text('referendcia');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('categoria_id');
             $table->timestamps();
         });
     }
