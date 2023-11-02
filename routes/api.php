@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\V1\GestiondetalleController as Gestiondetalle;
 use App\Http\Controllers\Api\V1\TipodedocumentoController as Tipodedocumento;
 use App\Http\Controllers\Api\V1\DocumentonormativaController as Documentonormativa;
 use App\Http\Controllers\Api\V1\SeguridadController as Seguridad;
+use App\Http\Controllers\Api\V1\NoticiaCategoriaController as NoticiaCategoria;
+use App\Http\Controllers\Api\V1\NoticiaController as Noticia;
 use App\Http\Controllers\Api\AuthController;
 
 
@@ -43,11 +45,30 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/gestion', Gestion::class);
     Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
-    // Route::apiResource('/v1/documentonormativa', Documentonormativa::class);
-    Route::apiResource('/v1/seguridad', Seguridad::class);
+    // Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
+
+    // Rutas para noticias
+    Route::apiResource('/v1/noticia', Noticia::class);
+    Route::apiResource('/v1/categoria-noticias', NoticiaCategoria::class);
+    
+
+    // Rutas de Archivos de Seguridad
     Route::post('/v1/seguridad-archivo', [Seguridad::class, 'crearArchivo']);
+    Route::get('/v1/seguridad-archivo', [Seguridad::class, 'listarArchivos']);
+    Route::put('/v1/seguridad-archivo/{id}', [Seguridad::class, 'actualizarArchivo']);
+    Route::delete('/v1/seguridad-archivo/{id}', [Seguridad::class, 'eliminarArchivo']);
+
+    // Rutas de Coleciones de Seguridad
     Route::post('/v1/seguridad-coleccion', [Seguridad::class, 'crearColeccion']);
+    Route::get('/v1/seguridad-coleccion', [Seguridad::class, 'listarColeccion']);
+    Route::put('/v1/seguridad-coleccion/{id}', [Seguridad::class, 'actualizarColeccion']);
+    Route::delete('/v1/seguridad-coleccion/{id}', [Seguridad::class, 'eliminarColeccion']);
+
+    // Rutas de cateogorias de Seguridad
     Route::post('/v1/seguridad-categoria', [Seguridad::class, 'crearCategoria']);
+    Route::get('/v1/seguridad-categoria', [Seguridad::class, 'listarCategoria']);
+    Route::put('/v1/seguridad-categoria/{id}', [Seguridad::class, 'actualizarCategoria']);
+    Route::delete('/v1/seguridad-categoria/{id}', [Seguridad::class, 'eliminarCategoria']);
 
 
 
@@ -59,4 +80,4 @@ Route::get('/v1/gestion', [Gestion::class, 'index']);
 Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
 Route::get('/v1/documentonormativa', [Documentonormativa::class, 'index']);
 Route::get('/v1/documentonormativa/{documentonormativa}', [Documentonormativa::class, 'show']);
-Route::get('/v1/seguridad', [Seguridad::class, 'index']);
+

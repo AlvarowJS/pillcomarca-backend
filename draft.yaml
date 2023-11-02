@@ -23,22 +23,22 @@ models:
     dependencia_id: id
     
 
-  Noticia_cateogoria:
-    titulo: nombre_categoria
-    relationships:
-      hasMany: Noticia
   Noticia_imagenes:
     imagen: text
-    relationships:
-      hasMany: Noticia
+    noticia_id: id
   Noticia:
     titulo: string
     fecha: date
     nota: text
-    referendcia: text
+    referencia: text
     user_id: id
-    categoria_id: id
-  
+    categoria_id: id    
+    relationships:
+      hasMany: Noticia_imagenes
+  Noticia_categoria:
+    nombre_categoria: string
+    relationships:
+      hasMany: Noticia
 
 controllers:
   # ...

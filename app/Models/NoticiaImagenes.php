@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class NoticiaCateogoria extends Model
+class NoticiaImagenes extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,8 @@ class NoticiaCateogoria extends Model
      * @var array
      */
     protected $fillable = [
-        'titulo',
+        'imagen',
+        'noticia_id',
     ];
 
     /**
@@ -26,10 +27,11 @@ class NoticiaCateogoria extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'noticia_id' => 'integer',
     ];
 
-    public function noticias(): HasMany
+    public function noticia(): BelongsTo
     {
-        return $this->hasMany(Noticia::class);
+        return $this->belongsTo(Noticia::class);
     }
 }

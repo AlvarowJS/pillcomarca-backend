@@ -4,17 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Noticia;
-use App\Models\Noticia_imagenes;
+use App\Models\Noticia_categoria;
 
-class NoticiaImagenesFactory extends Factory
+class NoticiaCategoriaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = NoticiaImagenes::class;
+    protected $model = NoticiaCategoria::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +21,7 @@ class NoticiaImagenesFactory extends Factory
     public function definition(): array
     {
         return [
-            'imagen' => $this->faker->text,
-            'noticia_id' => Noticia::factory(),
+            'nombre_categoria' => $this->faker->word,
         ];
     }
 }
