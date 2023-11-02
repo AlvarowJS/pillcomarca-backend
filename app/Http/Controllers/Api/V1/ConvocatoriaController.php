@@ -13,7 +13,7 @@ class ConvocatoriaController extends Controller
      */
     public function index()
     {
-        $datos = Convocatoria::with('conv_base', 'entrevista', 'result_cv', 'resultado')->get();
+        $datos = Convocatoria::with('conv_base', 'result_cv', 'resultado')->get();
         return response()->json($datos);
     }
 

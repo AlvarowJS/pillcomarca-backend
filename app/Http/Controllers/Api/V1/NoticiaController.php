@@ -17,9 +17,14 @@ class NoticiaController extends Controller
         return response()->json($datos);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function subirFoto(Request $request)
+    {
+
+    }
+    public function actualizarFoto(Request $request)
+    {
+
+    }
     public function store(Request $request)
     {
         
@@ -51,9 +56,17 @@ class NoticiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // $noticia = Noticia::find($id);        
+        $noticia = Noticia::with('noticiaImagenes', 'categoria', 'user')->find($id);
+
+        if(!$noticia) {
+            return response()->json([
+                'message' => 'Registro no encontrado', 404
+            ]);
+        }
+        return response()->json($noticia);
     }
 
     /**
@@ -61,14 +74,52 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        if (!$noticia) {
+            return response()->json(['message' => 'Noticia no encontrada'], Response::HTTP_NOT_FOUND);
+        }
+    
+        $noticia->titulo = $request->titulo ?? $noticia->titulo;
+        $noticia->fecha = $request->fecha ?? $noticia->fecha;
+        $noticia->nota = $request->nota ?? $noticia->nota;
+        $noticia->referencia = $request->referencia ?? $noticia->referencia;
+        $noticia->user_id = $request->user_id ?? $noticia->user_id;
+        $noticia->categoria_id = $request->categoria_id ?? $noticia->categoria_id;
+    
+        $noticia->save();
+    
+        // Actualización de las imágenes
+        $imagenes = $request->input('imagen');
+        if ($imagenes) {
+            // Elimina las imágenes existentes
+            NoticiaImagenes::where('noticia_id', $id)->delete();
+    
+            foreach ($imagenes as $imagen) {
+                $foto = new NoticiaImagenes;
+                $foto->imagen = $imagen;
+                $foto->noticia_id = $id;
+                $foto->save();
+            }
+        }
+    
+        return response()->json($noticia, Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $noticia = Noticia::find($id);
+
+        if (!$noticia) {
+            return response()->json(['message' => 'Noticia no encontrada'], Response::HTTP_NOT_FOUND);
+        }
+    
+    
+        NoticiaImagenes::where('noticia_id', $id)->delete();
+        $noticia->delete();
+        return response()->json($noticia, Response::HTTP_OK);
     }
 }
