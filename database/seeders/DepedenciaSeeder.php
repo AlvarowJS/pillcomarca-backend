@@ -46,7 +46,9 @@ class DepedenciaSeeder extends Seeder
             ['nombre_dependencia' => 'Sub Gerencia de Defensa Civil'],     
             ['nombre_dependencia' => 'Gerencia de Asesoría Jurídica'],
             ['nombre_dependencia' => 'Gerencia de Planeamiento y Presupuesto'],
-            ['nombre_dependencia' => 'Oficina de Programación e Inversiones'],       
+            ['nombre_dependencia' => 'Oficina de Programación e Inversiones'], 
+            ['nombre_dependencia' => 'Alcaldia'],  
+            ['nombre_dependencia' => 'Gerencia Municipal'],    
         ];
 
         // Insertar los dependencia en la tabla 'dependencia'
