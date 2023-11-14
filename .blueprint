@@ -1,28 +1,10 @@
 created:
-    - database/factories/SeguridadArchivoFactory.php
-    - database/factories/SeguridadColeccionFactory.php
-    - database/factories/SeguridadCategoriaFactory.php
-    - database/factories/DependenciaFactory.php
-    - database/factories/CargoFactory.php
-    - database/factories/NoticiaImagenesFactory.php
-    - database/factories/NoticiaFactory.php
-    - database/factories/NoticiaCategoriaFactory.php
-    - database/migrations/2023_10_31_193345_create_seguridad_archivos_table.php
-    - database/migrations/2023_10_31_193346_create_seguridad_coleccions_table.php
-    - database/migrations/2023_10_31_193347_create_seguridad_categorias_table.php
-    - database/migrations/2023_10_31_193348_create_dependencias_table.php
-    - database/migrations/2023_10_31_193349_create_cargos_table.php
-    - database/migrations/2023_10_31_193350_create_noticia_imagenes_table.php
-    - database/migrations/2023_10_31_193351_create_noticias_table.php
-    - database/migrations/2023_10_31_193352_create_noticia_categorias_table.php
-    - app/Models/Seguridad_archivo.php
-    - app/Models/Seguridad_coleccion.php
-    - app/Models/Seguridad_categoria.php
-    - app/Models/Dependencia.php
-    - app/Models/Cargo.php
-    - app/Models/Noticia_imagenes.php
-    - app/Models/Noticia.php
-    - app/Models/Noticia_categoria.php
+    - database/factories/PortadaFactory.php
+    - database/factories/AgendaFactory.php
+    - database/migrations/2023_11_13_170739_create_portadas_table.php
+    - database/migrations/2023_11_13_170740_create_agendas_table.php
+    - app/Models/Portada.php
+    - app/Models/Agenda.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -45,3 +27,5 @@ models:
     Noticia_imagenes: { imagen: text, noticia_id: id }
     Noticia: { titulo: string, fecha: date, nota: text, referendcia: text, user_id: id, categoria_id: id, relationships: { hasMany: Noticia_imagenes } }
     Noticia_categoria: { nombre_categoria: string, relationships: { hasMany: Noticia } }
+    Portada: { nombre_portada: string, foto: text, estado: boolean, user_id: id }
+    Agenda: { fecha: date, nombre_evento: string, hora_inicio: date, hora_fin: date, enlace: string, fullday: boolean, user_id: id }

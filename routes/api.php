@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\V1\DocumentonormativaController as Documentonormati
 use App\Http\Controllers\Api\V1\SeguridadController as Seguridad;
 use App\Http\Controllers\Api\V1\NoticiaCategoriaController as NoticiaCategoria;
 use App\Http\Controllers\Api\V1\NoticiaController as Noticia;
+use App\Http\Controllers\Api\V1\PortadaController as Portada;
+
 use App\Http\Controllers\Api\AuthController;
 
 
@@ -47,6 +49,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
     // Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
 
+    // Rutas para portadas
+    Route::apiResource('/v1/portada', Portada::class);
+    Route::post('/v1/portada-update', [Portada::class, 'update_foto']);
+
     // Rutas para noticias
     Route::apiResource('/v1/noticia', Noticia::class);
     Route::apiResource('/v1/categoria-noticias', NoticiaCategoria::class);
@@ -75,11 +81,11 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::get('/v1/seguridad', [Seguridad::class, 'index']);
-Route::get('/v1/noticias', [Noticia::class, 'index']);
-Route::get('/v1/noticias/{id}', [Noticia::class, 'show']);
+Route::get('/v1/noticia', [Noticia::class, 'index']);
+Route::get('/v1/noticia/{id}', [Noticia::class, 'show']);
 Route::get('/v1/convocatoria', [Convocatoria::class, 'index']);
 Route::get('/v1/gestion', [Gestion::class, 'index']);
 Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
 Route::get('/v1/documentonormativa', [Documentonormativa::class, 'index']);
 Route::get('/v1/documentonormativa/{documentonormativa}', [Documentonormativa::class, 'show']);
-
+Route::get('/v1/portada', [Portada::class, 'index']);

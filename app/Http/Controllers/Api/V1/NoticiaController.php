@@ -13,9 +13,13 @@ class NoticiaController extends Controller
     // Publico
     public function index()
     {
-        $datos = Noticia::with('noticiaImagenes', 'categoria', 'user')->get();
+        $perPage = \Request::query('perPage', 9);
+        $datos = Noticia::with('noticiaImagenes', 'categoria', 'user')
+            ->orderBy('fecha','desc')
+            ->paginate($perPage);
         return response()->json($datos);
     }
+
 
     public function subirFoto(Request $request)
     {
