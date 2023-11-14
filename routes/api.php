@@ -82,7 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/v1/seguridad', [Seguridad::class, 'index']);
 Route::get('/v1/noticia', [Noticia::class, 'index']);
-Route::get('/v1/noticia/{id}', [Noticia::class, 'show']);
+Route::get('/v1/noticias/{id}', [Noticia::class, 'show']);
 Route::get('/v1/convocatoria', [Convocatoria::class, 'index']);
 Route::get('/v1/gestion', [Gestion::class, 'index']);
 Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
