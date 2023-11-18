@@ -5,7 +5,6 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Cargo;
-use App\Models\Dependencia;
 
 class CargoFactory extends Factory
 {
@@ -24,7 +23,6 @@ class CargoFactory extends Factory
         return [
             'nombre_cargo' => $this->faker->word,
             'estado' => $this->faker->boolean,
-            'dependencia_id' => Dependencia::factory(),
         ];
     }
 }

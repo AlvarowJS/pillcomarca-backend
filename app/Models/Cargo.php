@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Cargo extends Model
 {
@@ -18,7 +17,6 @@ class Cargo extends Model
     protected $fillable = [
         'nombre_cargo',
         'estado',
-        'dependencia_id',
     ];
 
     /**
@@ -29,11 +27,5 @@ class Cargo extends Model
     protected $casts = [
         'id' => 'integer',
         'estado' => 'boolean',
-        'dependencia_id' => 'integer',
     ];
-
-    public function dependencia(): BelongsTo
-    {
-        return $this->belongsTo(Dependencia::class);
-    }
 }

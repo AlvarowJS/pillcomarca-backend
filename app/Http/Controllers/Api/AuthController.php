@@ -11,6 +11,15 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function authToken(Request $request)
+    {
+        $token = $request->header('Authorization');
+        $user = Auth::user();
+        $tableName = $user->getTable();
+        $user->token = $token;
+        $user->table = $tableName;
+        return $user;
+    }
     public function registerAdmin(Request $request)
     {
         $user = User::create([
@@ -22,6 +31,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => 1,
             'cargo_id' => $request->cargo_id,
+            'dependencia_id' => $request->dependencia_id,
             'estado' => true
         ]);
         return response()->json([
@@ -37,8 +47,10 @@ class AuthController extends Controller
             'celular' => $request->celular,                        
             'dni' => $request->dni,
             'email' => $request->email,
+            'role_id' => 6,
             'password' => Hash::make($request->password),
-                     
+            'cargo_id' => $request->cargo_id,
+            'dependencia_id' => $request->dependencia_id,
         ]);
         return response()->json([
             'message' => 'Usuario creado exitosamente.',

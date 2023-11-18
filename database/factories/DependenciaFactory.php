@@ -22,6 +22,7 @@ class DependenciaFactory extends Factory
     {
         return [
             'nombre_dependencia' => $this->faker->word,
+            'estado' => $this->faker->boolean,
         ];
     }
 }

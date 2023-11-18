@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dependencia extends Model
 {
@@ -17,6 +16,7 @@ class Dependencia extends Model
      */
     protected $fillable = [
         'nombre_dependencia',
+        'estado',
     ];
 
     /**
@@ -26,10 +26,6 @@ class Dependencia extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'estado' => 'boolean',
     ];
-
-    public function cargos(): HasMany
-    {
-        return $this->hasMany(Cargo::class);
-    }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->nullable()->constrained('roles');
             $table->foreignId('cargo_id')->nullable()->constrained('cargos');
+            $table->foreignId('dependencia_id')->nullable()->constrained('dependencias');
             $table->string('nombres');
             $table->string('apellidos');           
             $table->string('celular');

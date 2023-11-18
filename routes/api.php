@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\V1\SeguridadController as Seguridad;
 use App\Http\Controllers\Api\V1\NoticiaCategoriaController as NoticiaCategoria;
 use App\Http\Controllers\Api\V1\NoticiaController as Noticia;
 use App\Http\Controllers\Api\V1\PortadaController as Portada;
+use App\Http\Controllers\Api\V1\CargoController as Cargo;
+
 
 use App\Http\Controllers\Api\AuthController;
 
@@ -39,6 +41,10 @@ Route::post('register-user', [AuthController::class, 'registerUser']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/token-auth', [AuthController::class, 'authToken']);
+
+
     Route::apiResource('/v1/convocatoria', Convocatoria::class);
     Route::apiResource('/v1/bases', Conv_base::class);
     Route::apiResource('/v1/entrevista', Entrevista::class);
@@ -56,7 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Rutas para noticias
     Route::apiResource('/v1/noticia', Noticia::class);
     Route::apiResource('/v1/categoria-noticias', NoticiaCategoria::class);
-    
+
 
     // Rutas de Archivos de Seguridad
     Route::post('/v1/seguridad-archivo', [Seguridad::class, 'crearArchivo']);
@@ -80,6 +86,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+Route::get('/v1/cargos', [Cargo::class, 'index']);
+Route::get('/v1/cargos-dependencias', [Cargo::class, 'mostrarDependencias']);
 Route::get('/v1/seguridad', [Seguridad::class, 'index']);
 Route::get('/v1/noticia', [Noticia::class, 'index']);
 Route::get('/v1/noticias/{id}', [Noticia::class, 'show']);

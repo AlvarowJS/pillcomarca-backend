@@ -13,14 +13,12 @@ models:
   #   relationships:
   #     hasMany: Seguridad_coleccion
 
-  # Dependencia:
-  #   nombre_dependencia: string
-  #   relationships:
-  #     hasMany: Cargo
-  # Cargo:
-  #   nombre_cargo: string
-  #   estado: boolean
-  #   dependencia_id: id
+  Dependencia:
+    nombre_dependencia: string
+    estado: boolean
+  Cargo:
+    nombre_cargo: string
+    estado: boolean
     
 
   # Noticia_imagenes:
@@ -40,20 +38,20 @@ models:
   #   relationships:
   #     hasMany: Noticia
 
-  Portada:
-    nombre_portada: string
-    foto: text
-    estado: boolean
-    user_id: id
+  # Portada:
+  #   nombre_portada: string
+  #   foto: text
+  #   estado: boolean
+  #   user_id: id
 
-  Agenda:
-    fecha: date
-    nombre_evento: string
-    hora_inicio: date
-    hora_fin: date
-    enlace: string
-    fullday: boolean
-    user_id: id
+  # Agenda:
+  #   fecha: date
+  #   nombre_evento: string
+  #   hora_inicio: date
+  #   hora_fin: date
+  #   enlace: string
+  #   fullday: boolean
+  #   user_id: id
 
   
 controllers:
