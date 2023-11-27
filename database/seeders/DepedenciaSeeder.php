@@ -49,6 +49,10 @@ class DepedenciaSeeder extends Seeder
             ['nombre_dependencia' => 'Oficina de Programación e Inversiones', 'estado' => true], 
             ['nombre_dependencia' => 'Alcaldia', 'estado' => true],  
             ['nombre_dependencia' => 'Gerencia Municipal', 'estado' => true],    
+            ['nombre_dependencia' => 'Programa de Vaso de Leche', 'estado' => true],    
+            ['nombre_dependencia' => 'RENIEC', 'estado' => true],    
+            ['nombre_dependencia' => 'SISFOH', 'estado' => true],
+            ['nombre_dependencia' => 'Subgerencia de Transportes y Seguridad Vial', 'estado' => true],    
         ];
 
         // Insertar los dependencia en la tabla 'dependencia'

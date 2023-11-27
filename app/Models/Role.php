@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Dependencia extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -16,8 +17,9 @@ class Dependencia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_dependencia',
-        'estado',
+        'name',
+        'descripcion',
+        'role_number'
     ];
 
     /**
@@ -27,11 +29,12 @@ class Dependencia extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'estado' => 'boolean',
+        'role_number' => 'integer'
     ];
 
-    public function registroVisitas(): HasMany
+    public function user(): HasMany
     {
-        return $this->hasMany(RegistroVisita::class);
+        return $this->hasMany(User::class);
     }
+
 }

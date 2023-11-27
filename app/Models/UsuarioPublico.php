@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Dependencia extends Model
+class UsuarioPublico extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,10 @@ class Dependencia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_dependencia',
-        'estado',
+        'nombre',
+        'apellidos',
+        'dni',
+        'persona',
     ];
 
     /**
@@ -27,7 +29,6 @@ class Dependencia extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'estado' => 'boolean',
     ];
 
     public function registroVisitas(): HasMany

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,8 @@ class AuthController extends Controller
         $token = $request->header('Authorization');
         $user = Auth::user();
         $tableName = $user->getTable();
+        $rol = $user->role->role_num;
+        $user->role = $rol;
         $user->token = $token;
         $user->table = $tableName;
         return $user;
@@ -25,7 +28,7 @@ class AuthController extends Controller
         $user = User::create([
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
-            'celular' => $request->celular,                        
+            'celular' => $request->celular,
             'dni' => $request->dni,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -41,16 +44,46 @@ class AuthController extends Controller
     }
     public function registerUser(Request $request)
     {
+        $dependencia = $request->dependencia_id;
+        // Alcalde
+        if ($dependencia == 34) {
+            $roleId = 2;
+        }
+        // Gerencia Municipal
+        elseif ($dependencia == 35) {
+            $roleId = 3;
+        }
+        // Imagen
+        elseif ($dependencia == 5) {
+            $roleId = 4;
+        }
+        // Recursos Humanos
+        elseif ($dependencia == 9) {
+            $roleId = 5;
+        }
+        // Archivos
+        elseif ($dependencia == 8) {
+            $roleId = 6;
+        }
+        // Guardia
+        elseif ($dependencia == 21) {
+            $roleId = 7;
+        } else {
+            $roleId = 8;
+        }
+        $roleNumber = Role::where('role_num', $roleId)->get();
+        
         $user = User::create([
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
-            'celular' => $request->celular,                        
+            'celular' => $request->celular,
             'dni' => $request->dni,
             'email' => $request->email,
-            'role_id' => 6,
+            'role_id' => $roleNumber[0]->id,
             'password' => Hash::make($request->password),
             'cargo_id' => $request->cargo_id,
-            'dependencia_id' => $request->dependencia_id,
+            'dependencia_id' => $dependencia,
+            'estado' => true
         ]);
         return response()->json([
             'message' => 'Usuario creado exitosamente.',
@@ -69,13 +102,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $rol = $user->role_id;
+            $rol = $user->role->role_num;
             $nombres = $user->nombres;
             $apellidos = $user->apellidos;
             $cargo = $user->cargo_id;
             $token = $user->createToken('api_token')->plainTextToken;
             return response()->json([
-                'api_token' => $token, 
+                'api_token' => $token,
                 'rol' => $rol,
                 'nombres' => $nombres,
                 'apellidos' => $apellidos,

@@ -1,10 +1,10 @@
 created:
-    - database/factories/DependenciaFactory.php
-    - database/factories/CargoFactory.php
-    - database/migrations/2023_11_17_165622_create_dependencias_table.php
-    - database/migrations/2023_11_17_165623_create_cargos_table.php
-    - app/Models/Dependencia.php
-    - app/Models/Cargo.php
+    - database/factories/RegistroVisitaFactory.php
+    - database/factories/UsuarioPublicoFactory.php
+    - database/migrations/2023_11_23_174657_create_registro_visitas_table.php
+    - database/migrations/2023_11_23_174658_create_usuario_publicos_table.php
+    - app/Models/Registro_visita.php
+    - app/Models/Usuario_publico.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -29,3 +29,5 @@ models:
     Noticia_categoria: { nombre_categoria: string, relationships: { hasMany: Noticia } }
     Portada: { nombre_portada: string, foto: text, estado: boolean, user_id: id }
     Agenda: { fecha: date, nombre_evento: string, hora_inicio: date, hora_fin: date, enlace: string, fullday: boolean, user_id: id }
+    Registro_visita: { fecha: date, asunto: text, oficina: text, hora_ingreso: datetime, hora_salida: datetime, user_id: id, usuario_publico_id: id }
+    Usuario_publico: { nombre: string, apellidos: string, dni: string, persona: string, relationships: { hasMany: Registro_visita } }

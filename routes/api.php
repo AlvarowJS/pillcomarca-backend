@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\V1\NoticiaCategoriaController as NoticiaCategoria;
 use App\Http\Controllers\Api\V1\NoticiaController as Noticia;
 use App\Http\Controllers\Api\V1\PortadaController as Portada;
 use App\Http\Controllers\Api\V1\CargoController as Cargo;
+use App\Http\Controllers\Api\V1\RegistrovisitaController as Registro;
+use App\Http\Controllers\Api\V1\UsuarioPublicoController as UsuarioPublico;
 
 
 use App\Http\Controllers\Api\AuthController;
@@ -82,10 +84,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/v1/seguridad-categoria/{id}', [Seguridad::class, 'actualizarCategoria']);
     Route::delete('/v1/seguridad-categoria/{id}', [Seguridad::class, 'eliminarCategoria']);
 
+    // Rutas para registros
+    Route::apiResource('/v1/registro-visitas', Registro::class);
+    Route::post('/v1/registro-visitas-dni', [UsuarioPublico::class, 'registroVisitaUsuario']);
 
 
 });
-
+Route::get('/v1/usuario-publico/{dni}', [UsuarioPublico::class, 'show']);
+Route::get('/v1/registro', [Registro::class, 'index']);
 Route::get('/v1/cargos', [Cargo::class, 'index']);
 Route::get('/v1/cargos-dependencias', [Cargo::class, 'mostrarDependencias']);
 Route::get('/v1/seguridad', [Seguridad::class, 'index']);
