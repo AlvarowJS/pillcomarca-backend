@@ -14,14 +14,14 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            ['name' => 'Admin', 'descripcion' => 'Administrador total','role_num' => '1'],
-            ['name' => 'Alcalde', 'descripcion' => 'Tendra acceso a una agenda y otros','role_num' => '2'],
-            ['name' => 'Gerente Municipal', 'descripcion' => 'Tendra acceso a una agenda y otros','role_num' => '3'],
-            ['name' => 'Imagen', 'descripcion' => 'Tendra acceso a subir noticias y portadas','role_num' => '4'],
-            ['name' => 'Recursos Humanos', 'descripcion' => 'Tendra acceso a emitir comunicados','role_num' => '5'],
-            ['name' => 'Archivos', 'descripcion' => 'Podra subir archivos pdf por categoria','role_num' => '6'],
-            ['name' => 'Guardia', 'descripcion' => 'Realizara el registro de visitas de la municipalidad','role_num' => '7'],
-            ['name' => 'Usuario General', 'descripcion' => 'Podra emitir tickets de atencion y ver los comunicados','role_num' => '8'],
+            ['name' => 'Admin', 'descripcion' => 'Administrador total','role_number' => '1'],
+            ['name' => 'Alcalde', 'descripcion' => 'Tendra acceso a una agenda y otros','role_number' => '2'],
+            ['name' => 'Gerente Municipal', 'descripcion' => 'Tendra acceso a una agenda y otros','role_number' => '3'],
+            ['name' => 'Imagen', 'descripcion' => 'Tendra acceso a subir noticias y portadas','role_number' => '4'],
+            ['name' => 'Recursos Humanos', 'descripcion' => 'Tendra acceso a emitir comunicados','role_number' => '5'],
+            ['name' => 'Archivos', 'descripcion' => 'Podra subir archivos pdf por categoria','role_number' => '6'],
+            ['name' => 'Guardia', 'descripcion' => 'Realizara el registro de visitas de la municipalidad','role_number' => '7'],
+            ['name' => 'Usuario General', 'descripcion' => 'Podra emitir tickets de atencion y ver los comunicados','role_number' => '8'],
             // Agrega más roles si es necesario
         ];
 
