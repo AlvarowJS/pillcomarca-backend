@@ -17,7 +17,7 @@ class AuthController extends Controller
         $token = $request->header('Authorization');
         $user = Auth::user();
         $tableName = $user->getTable();
-        $rol = $user->role->role_num;
+        $rol = $user->role->role_number;
         $user->role = $rol;
         $user->token = $token;
         $user->table = $tableName;
@@ -71,7 +71,7 @@ class AuthController extends Controller
         } else {
             $roleId = 8;
         }
-        $roleNumber = Role::where('role_num', $roleId)->get();
+        $roleNumber = Role::where('role_number', $roleId)->get();
         
         $user = User::create([
             'nombres' => $request->nombres,
@@ -102,7 +102,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $rol = $user->role->role_num;
+            $rol = $user->role->role_number;
             $nombres = $user->nombres;
             $apellidos = $user->apellidos;
             $cargo = $user->cargo_id;
