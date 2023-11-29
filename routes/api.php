@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/gestion', Gestion::class);
     Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
-    // Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
+    Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
 
     // Rutas para portadas
     Route::apiResource('/v1/portada', Portada::class);
