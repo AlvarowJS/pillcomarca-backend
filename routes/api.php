@@ -90,6 +90,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 });
+Route::get('/v1/registro-visitas', [Registro::class, 'index']);
 Route::get('/v1/usuario-publico/{dni}', [UsuarioPublico::class, 'show']);
 Route::get('/v1/registro', [Registro::class, 'index']);
 Route::get('/v1/cargos', [Cargo::class, 'index']);

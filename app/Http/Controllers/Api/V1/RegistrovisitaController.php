@@ -13,10 +13,14 @@ class RegistrovisitaController extends Controller
      */
     public function index()
     {
-        $perPage = \Request::query('perPage', 10);
+        $perPage = \Request::query('per_page', 10);
+        $currentPage = \Request::query('page', 1);
+
         $registros = RegistroVisita::with('usuarioPublico', 'depedencia')
-            ->orderBy('created_at', 'desc')
-            ->paginate($perPage);
+            ->orderBy('fecha', 'desc')
+            ->orderBy('hora_ingreso', 'desc')
+            ->paginate($perPage, ['*'], 'page', $currentPage);
+
 
         return response()->json($registros);
     }

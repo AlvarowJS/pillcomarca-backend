@@ -103,6 +103,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $rol = $user->role->role_number;
+            $id = $user->id;
             $nombres = $user->nombres;
             $apellidos = $user->apellidos;
             $cargo = $user->cargo_id;
@@ -113,6 +114,7 @@ class AuthController extends Controller
                 'nombres' => $nombres,
                 'apellidos' => $apellidos,
                 'cargo' => $cargo,
+                'user' => $id
             ], 200);
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);

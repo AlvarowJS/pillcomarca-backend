@@ -32,7 +32,7 @@ class Noticia extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'fecha' => 'date',
+        // 'fecha' => 'date',
         'user_id' => 'integer',
         'categoria_id' => 'integer',
     ];
