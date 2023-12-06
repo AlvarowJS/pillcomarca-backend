@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\PortadaController as Portada;
 use App\Http\Controllers\Api\V1\CargoController as Cargo;
 use App\Http\Controllers\Api\V1\RegistrovisitaController as Registro;
 use App\Http\Controllers\Api\V1\UsuarioPublicoController as UsuarioPublico;
+use App\Http\Controllers\Api\V1\DirectorioController as Directorio;
 
 
 use App\Http\Controllers\Api\AuthController;
@@ -55,7 +56,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/gestion', Gestion::class);
     Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
-    Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
+    Route::apiResource('/v1/documentonormativa', Documentonormativa::class); 
+    Route::apiResource('/v1/directorio', Directorio::class);       
 
     // Rutas para portadas
     Route::apiResource('/v1/portada', Portada::class);
@@ -104,3 +106,4 @@ Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
 Route::get('/v1/documentonormativa', [Documentonormativa::class, 'index']);
 Route::get('/v1/documentonormativa/{documentonormativa}', [Documentonormativa::class, 'show']);
 Route::get('/v1/portada', [Portada::class, 'index']);
+Route::get('/v1/directorio', [Directorio::class, 'index']);
