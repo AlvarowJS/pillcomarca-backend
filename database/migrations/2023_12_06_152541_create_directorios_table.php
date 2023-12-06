@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('dni',8)->nullable();
             $table->string('celular',9)->nullable();
             $table->string('correo')->nullable();
+            $table->text('foto')->nullable();
             $table->string('cargo')->nullable();
             $table->string('dependencia')->nullable();
             $table->boolean('estado');

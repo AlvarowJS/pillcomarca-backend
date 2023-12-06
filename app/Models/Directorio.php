@@ -20,6 +20,7 @@ class Directorio extends Model
         'dni',
         'celular',
         'correo',
+        'foto',
         'cargo',
         'dependencia',
         'estado',

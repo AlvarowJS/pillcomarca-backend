@@ -13,7 +13,9 @@ class DirectorioController extends Controller
      */
     public function index()
     {
-        $directorio = Directorio::all();  
+        $directorio = Directorio::all(); 
+        $perPage = \Request::query('perPage', 9);
+        $directorio = Directorio::paginate($perPage);        
         return response()->json($directorio);
         
     }
@@ -29,6 +31,7 @@ class DirectorioController extends Controller
         $directorio->dni = $request->dni;
         $directorio->celular = $request->celular;
         $directorio->correo = $request->correo;
+        $directorio->foto = $request->foto;
         $directorio->cargo = $request->cargo;
         $directorio->dependencia = $request->dependencia;
         $directorio->estado = True;
@@ -67,6 +70,7 @@ class DirectorioController extends Controller
         $directorio->dni = $request->dni;
         $directorio->celular = $request->celular;
         $directorio->correo = $request->correo;
+        $directorio->foto = $request->foto;
         $directorio->cargo = $request->cargo;
         $directorio->dependencia = $request->dependencia;
         
