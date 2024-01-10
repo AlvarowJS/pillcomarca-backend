@@ -53,20 +53,29 @@ models:
   #   fullday: boolean
   #   user_id: id
 
-  Registro_visita:
-    fecha: date    
-    asunto: text
-    oficina: text
-    hora_ingreso: datetime
-    hora_salida: datetime
-    user_id: id
-    usuario_publico_id: id
-  Usuario_publico:    
-    nombre: string
+  # Registro_visita:
+  #   fecha: date    
+  #   asunto: text
+  #   oficina: text
+  #   hora_ingreso: datetime
+  #   hora_salida: datetime
+  #   user_id: id
+  #   usuario_publico_id: id
+  # Usuario_publico:    
+  #   nombre: string
+  #   apellidos: string
+  #   dni: string
+  #   persona: string
+  #   relationships:
+  #     hasMany: Registro_visita
+
+  Directorio:
+    nombres: string
     apellidos: string
-    dni: string
-    persona: string
-    relationships:
-      hasMany: Registro_visita
+    correo: string
+    cel: string
+    cargo: string
+    dependencia: string
+
 controllers:
   # ...

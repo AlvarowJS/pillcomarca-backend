@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\V1\PortadaController as Portada;
 use App\Http\Controllers\Api\V1\CargoController as Cargo;
 use App\Http\Controllers\Api\V1\RegistrovisitaController as Registro;
 use App\Http\Controllers\Api\V1\UsuarioPublicoController as UsuarioPublico;
+use App\Http\Controllers\Api\V1\DirectorioController as Directorio;
 
 
 use App\Http\Controllers\Api\AuthController;
@@ -88,8 +89,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/registro-visitas', Registro::class);
     Route::post('/v1/registro-visitas-dni', [UsuarioPublico::class, 'registroVisitaUsuario']);
 
-
+    // Directorio
+    Route::apiResource('/v1/directorios', Directorio::class);
+    Route::post('/v1/update-directorios', [Directorio::class, 'updateFoto']);
+    Route::get('/v1/simple-directorios', [Directorio::class, 'indexSimple']);
 });
+Route::get('/v1/directorios', [Directorio::class, 'index']);
 Route::get('/v1/registro-visitas', [Registro::class, 'index']);
 Route::get('/v1/usuario-publico/{dni}', [UsuarioPublico::class, 'show']);
 Route::get('/v1/registro', [Registro::class, 'index']);

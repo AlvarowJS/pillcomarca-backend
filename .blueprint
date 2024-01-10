@@ -1,10 +1,7 @@
 created:
-    - database/factories/RegistroVisitaFactory.php
-    - database/factories/UsuarioPublicoFactory.php
-    - database/migrations/2023_11_23_174657_create_registro_visitas_table.php
-    - database/migrations/2023_11_23_174658_create_usuario_publicos_table.php
-    - app/Models/Registro_visita.php
-    - app/Models/Usuario_publico.php
+    - database/factories/DirectorioFactory.php
+    - database/migrations/2024_01_08_195537_create_directorios_table.php
+    - app/Models/Directorio.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -31,3 +28,4 @@ models:
     Agenda: { fecha: date, nombre_evento: string, hora_inicio: date, hora_fin: date, enlace: string, fullday: boolean, user_id: id }
     Registro_visita: { fecha: date, asunto: text, oficina: text, hora_ingreso: datetime, hora_salida: datetime, user_id: id, usuario_publico_id: id }
     Usuario_publico: { nombre: string, apellidos: string, dni: string, persona: string, relationships: { hasMany: Registro_visita } }
+    Directorio: { nombres: string, apellidos: string, correo: string, cel: string, cargo: string, dependencia: string }
