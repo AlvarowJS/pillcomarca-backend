@@ -69,13 +69,38 @@ models:
   #   relationships:
   #     hasMany: Registro_visita
 
-  Directorio:
-    nombres: string
-    apellidos: string
-    correo: string
-    cel: string
-    cargo: string
-    dependencia: string
+  # Directorio:
+  #   nombres: string
+  #   apellidos: string
+  #   correo: string
+  #   cel: string
+  #   cargo: string
+  #   dependencia: string
+
+  Ticket:
+    detalle: string
+    estado: string
+    fecha: date
+    fecha_atencion: date
+    fecha_conclu: date
+    conclusion: string
+    urgencia: string
+    urgencia_verdad: string
+    hora: time
+    hora_atencion: time
+    hora_conclu: time
+    user_id: id
+    pc_id: id
+    
+  Pc:
+    procesador: string
+    ram: string
+    almacenamiento: string
+    tipo: string
+    ip: string
+    cod_patrimonial: string
+    relationships:
+      hasMany: Ticket
 
 controllers:
   # ...
