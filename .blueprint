@@ -1,7 +1,10 @@
 created:
-    - database/factories/DirectorioFactory.php
-    - database/migrations/2024_01_08_195537_create_directorios_table.php
-    - app/Models/Directorio.php
+    - database/factories/TicketFactory.php
+    - database/factories/PcFactory.php
+    - database/migrations/2024_01_19_195027_create_tickets_table.php
+    - database/migrations/2024_01_19_195028_create_pcs_table.php
+    - app/Models/Ticket.php
+    - app/Models/Pc.php
 models:
     Conv_base: {  }
     Convocatoria: {  }
@@ -29,3 +32,5 @@ models:
     Registro_visita: { fecha: date, asunto: text, oficina: text, hora_ingreso: datetime, hora_salida: datetime, user_id: id, usuario_publico_id: id }
     Usuario_publico: { nombre: string, apellidos: string, dni: string, persona: string, relationships: { hasMany: Registro_visita } }
     Directorio: { nombres: string, apellidos: string, correo: string, cel: string, cargo: string, dependencia: string }
+    Ticket: { detalle: string, estado: string, fecha: date, fecha_atencion: date, fecha_conclu: date, conclusion: string, urgencia: string, urgencia_verdad: string, hora: time, hora_atencion: time, hora_conclu: time, user_id: id, ticket_id: id }
+    Pc: { procesador: string, ram: string, almacenamiento: string, tipo: string, ip: string, cod_patrimonial: string, relationships: { hasMany: Ticket } }
