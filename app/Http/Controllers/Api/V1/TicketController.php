@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    public function mostrarTicketUser($id)
+    public function mostrarTicketUser($user_id)
     {
-        return "hola";
+        // Utiliza Eloquent para buscar todos los tickets asociados al user_id proporcionado
+        $tickets = Ticket::where('user_id', $user_id)->get();
+
+        // Retorna los tickets encontrados en formato JSON
+        return response()->json($tickets);
     }
+    
     /**
      * Display a listing of the resource.
      */
