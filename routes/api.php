@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/ticket', Ticket::class);
     Route::apiResource('/v1/pc', Pc::class);
     Route::get('/v1/ticket-user/{id}', [Ticket::class, 'mostrarTicketUser']);
+    Route::put('/v1/ticket-estado/{id}', [Ticket::class, 'estadoTicket']);
 });
 Route::get('/v1/directorios', [Directorio::class, 'index']);
 Route::get('/v1/registro-visitas', [Registro::class, 'index']);

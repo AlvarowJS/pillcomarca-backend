@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('pcs', function (Blueprint $table) {
             $table->id();
             $table->string('procesador');
+            $table->string('tipo_procesador');
             $table->string('ram');
             $table->string('almacenamiento');
             $table->string('tipo');
             $table->string('ip');
             $table->string('cod_patrimonial');
+            $table->unsignedBigInteger('dependencia_id')->nullable()->constrained('dependencias');
             $table->timestamps();
         });
     }

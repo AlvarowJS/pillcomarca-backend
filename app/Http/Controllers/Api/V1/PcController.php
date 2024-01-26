@@ -24,11 +24,13 @@ class PcController extends Controller
     {
         $pc = new Pc();
         $pc->procesador = $request->procesador;
+        $pc->tipo_procesador = $request->tipo_procesador;
         $pc->ram = $request->ram;
         $pc->almacenamiento = $request->almacenamiento;
         $pc->tipo = $request->tipo;
         $pc->ip = $request->ip;
         $pc->cod_patrimonial = $request->cod_patrimonial;
+        $pc->dependencia_id = $request->dependencia_id;
         $pc->save();
         return response()->json($pc);
     }
@@ -56,11 +58,13 @@ class PcController extends Controller
             return response()->json(['message' =>'Registro no encontrado0'], 404);
         }
         $pc->procesador = $request->procesador;
+        $pc->tipo_procesador = $request->tipo_procesador;
         $pc->ram = $request->ram;
         $pc->almacenamiento = $request->almacenamiento;
         $pc->tipo = $request->tipo;
         $pc->ip = $request->ip;
         $pc->cod_patrimonial = $request->cod_patrimonial;
+        $pc->dependencia_id = $request->dependencia_id;
         $pc->save();
         return response()->json($pc);
     }

@@ -8,6 +8,25 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
+    public function estadoTicket($ticket_id)
+    {
+            // Buscar el ticket por su ID
+    $ticket = Ticket::find($ticket_id);
+
+    // Verificar si el ticket existe
+    if ($ticket) {
+        // Cambiar el estado del ticket a "atendiendo" (estado 2)
+        $ticket->estado = 2; // Suponiendo que el estado 2 corresponde a "atendiendo"
+        $ticket->save();
+
+        // Retornar una respuesta JSON indicando que se actualizó el estado del ticket
+        return response()->json(['message' => 'El estado del ticket ha sido actualizado a "atendiendo"']);
+    } else {
+        // Retornar una respuesta JSON si el ticket no fue encontrado
+        return response()->json(['message' => 'No se encontró el ticket con el ID proporcionado'], 404);
+    }   
+    }
+
     public function mostrarTicketUser($user_id)
     {
         // Utiliza Eloquent para buscar todos los tickets asociados al user_id proporcionado
@@ -16,7 +35,7 @@ class TicketController extends Controller
         // Retorna los tickets encontrados en formato JSON
         return response()->json($tickets);
     }
-    
+
     /**
      * Display a listing of the resource.
      */
