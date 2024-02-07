@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->string('detalle');
-            $table->string('estado')->nullable();
+            $table->unsignedInteger('estado')->default(1);
             $table->date('fecha');
             $table->date('fecha_atencion')->nullable();
             $table->date('fecha_conclu')->nullable();
             $table->string('conclusion')->nullable();
-            $table->string('urgencia');
-            $table->string('urgencia_verdad')->nullable();
+            $table->integer('urgencia');
+            $table->integer('urgencia_verdad')->nullable();
             $table->time('hora');
             $table->time('hora_atencion')->nullable();
             $table->time('hora_conclu')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('pc_id')->nullable()->constrained('pcs');
+            $table->unsignedBigInteger('user_id')->nullable()->constrained('users');
+            $table->unsignedBigInteger('hardware_id')->nullable()->constrained('pcs');
             $table->timestamps();
         });
     }

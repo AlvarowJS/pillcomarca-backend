@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pcs', function (Blueprint $table) {
+        Schema::create('tipos', function (Blueprint $table) {
             $table->id();
-            $table->string('procesador');
-            $table->string('ram');
-            $table->string('almacenamiento');
-            $table->string('tipo');
-            $table->string('ip');
-            $table->string('cod_patrimonial');
+            $table->string('nombre');
+            $table->unsignedBigInteger('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pcs');
+        Schema::dropIfExists('tipos');
     }
 };
