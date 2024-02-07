@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Dependencia extends Model
+class Hardware extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,18 @@ class Dependencia extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_dependencia',
-        'estado',
+        'tipo',
+        'procesador',
+        'ram',
+        'almacenamiento',
+        'tipo_alma',
+        'ip',
+        'marca',
+        'especif',
+        'cod_patri',
+        'user_id',
+        'tipo_id',
+        'dependencia_id',
     ];
 
     /**
@@ -27,11 +37,15 @@ class Dependencia extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'estado' => 'boolean',
     ];
 
-    public function hardwares(): HasMany
+    public function dependencia()
     {
-        return $this->hasMany(Hardware::class);
+        return $this->belongsTo(Dependencia::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
     }
 }

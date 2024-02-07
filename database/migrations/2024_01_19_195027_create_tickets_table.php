@@ -25,7 +25,7 @@ return new class extends Migration
             $table->time('hora_atencion')->nullable();
             $table->time('hora_conclu')->nullable();
             $table->unsignedBigInteger('user_id')->nullable()->constrained('users');
-            $table->unsignedBigInteger('pc_id')->nullable()->constrained('pcs');
+            $table->unsignedBigInteger('hardware_id')->nullable()->constrained('pcs');
             $table->timestamps();
         });
     }

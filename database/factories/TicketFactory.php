@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Hardware;
 use App\Models\Ticket;
 use App\Models\User;
 
@@ -34,7 +35,7 @@ class TicketFactory extends Factory
             'hora_atencion' => $this->faker->time(),
             'hora_conclu' => $this->faker->time(),
             'user_id' => User::factory(),
-            'ticket_id' => Ticket::factory(),
+            'hardware_id' => Hardware::factory(),
         ];
     }
 }

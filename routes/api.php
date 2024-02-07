@@ -21,10 +21,11 @@ use App\Http\Controllers\Api\V1\RegistrovisitaController as Registro;
 use App\Http\Controllers\Api\V1\UsuarioPublicoController as UsuarioPublico;
 use App\Http\Controllers\Api\V1\DirectorioController as Directorio;
 use App\Http\Controllers\Api\V1\TicketController as Ticket;
-use App\Http\Controllers\Api\V1\PcController as Pc;
+use App\Http\Controllers\Api\V1\HardwareController as Hardware;
+use App\Http\Controllers\Api\V1\TipoController as Tipo;
 
 use App\Http\Controllers\Api\AuthController;
-
+use App\Http\Controllers\Api\V1\TipoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,9 +98,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //TICKET
     Route::apiResource('/v1/ticket', Ticket::class);
-    Route::apiResource('/v1/pc', Pc::class);
+    Route::apiResource('/v1/tipo', Tipo::class);
+    Route::apiResource('/v1/hardware', Hardware::class);
+    Route::get('/v1/hardware-dependencia/{id}', [Hardware::class, 'hardwarePorDependencia']);
+    Route::get('/v1/hardware-tickets/{id}', [Hardware::class, 'ticketsPorCodPatri']);
     Route::get('/v1/ticket-user/{id}', [Ticket::class, 'mostrarTicketUser']);
-    Route::put('/v1/ticket-estado/{id}', [Ticket::class, 'estadoTicket']);
+    Route::get('/v1/ticket-dependencia/{id}', [Ticket::class, 'mostrarTicketsDependencia']);
+    Route::put('/v1/ticket-atender/{id}', [Ticket::class, 'atenderTicket']);
+    Route::put('/v1/ticket-finalizar/{id}', [Ticket::class, 'marcarComoFinalizado']);
+    Route::get('/v1/tickets-activos', [Ticket::class, 'mostrarTicketsActivos']);
+    Route::get('/v1/ticket-orden/{id}', [Ticket::class, 'obtenerPosicion']);
 });
 Route::get('/v1/directorios', [Directorio::class, 'index']);
 Route::get('/v1/registro-visitas', [Registro::class, 'index']);

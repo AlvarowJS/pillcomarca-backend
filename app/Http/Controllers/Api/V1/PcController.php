@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Pc;
 use Illuminate\Http\Request;
+use App\Models\Dependencia;
 
 class PcController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -22,6 +24,15 @@ class PcController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar que la dependencia con el ID proporcionado existe en la base de datos
+        $dependencia = Dependencia::find($request->dependencia_id);
+    
+        if (!$dependencia) {
+            // Si la dependencia no existe, devuelve un error
+            return response()->json(['error' => 'La dependencia no existe'], 404);
+        }
+    
+        // Si la dependencia existe, crea la PC
         $pc = new Pc();
         $pc->procesador = $request->procesador;
         $pc->tipo_procesador = $request->tipo_procesador;
@@ -32,9 +43,9 @@ class PcController extends Controller
         $pc->cod_patrimonial = $request->cod_patrimonial;
         $pc->dependencia_id = $request->dependencia_id;
         $pc->save();
+    
         return response()->json($pc);
     }
-
     /**
      * Display the specified resource.
      */

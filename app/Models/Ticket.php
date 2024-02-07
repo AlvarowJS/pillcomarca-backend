@@ -28,7 +28,7 @@ class Ticket extends Model
         'hora_atencion',
         'hora_conclu',
         'user_id',
-        'pc_id',
+        'hardware_id',
     ];
 
     /**
@@ -38,11 +38,12 @@ class Ticket extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        //'fecha' => 'date',
+        'fecha' => 'date',
         'fecha_atencion' => 'date',
         'fecha_conclu' => 'date',
         'user_id' => 'integer',
-        'ticket_id' => 'integer',
+        'hardware_id' => 'integer',
+        
     ];
 
     public function user(): BelongsTo
@@ -50,8 +51,8 @@ class Ticket extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ticket(): BelongsTo
+    public function hardware(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class);
+        return $this->belongsTo(Hardware::class);
     }
 }
