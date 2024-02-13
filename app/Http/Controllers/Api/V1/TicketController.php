@@ -84,6 +84,8 @@ class TicketController extends Controller
         return response()->json(['message' => 'El ticket ha sido marcado como finalizado']);
     }
 
+    
+
     public function obtenerPosicion($user_id)
     {
         // Convertir el user_id a string
@@ -122,16 +124,18 @@ class TicketController extends Controller
             elseif ($estadoTicket === 3) {
                 return response()->json(['message' => 'Usted ya fue atendido']);
             }
-            // Si no, retorna la posición del ticket del usuario
+            // Si no, retorna la posición del ticket del usuario y el JSON con solo la orden
             else {
-                return response()->json(['message' => 'El ticket del usuario está en posición ' . $posicion]);
+                return response()->json([
+                    'message' => 'El ticket del usuario está en posición ' . $posicion,
+                    'orden' => $posicion
+                ]);
             }
         } else {
             // Si no se encuentra el ticket, retorna un mensaje indicando que el usuario no tiene ningún ticket en estado activo
             return response()->json(['message' => 'El usuario no tiene ningún ticket en estado activo'], 404);
         }
     }
-    
     
     
     
@@ -175,19 +179,37 @@ class TicketController extends Controller
     {
         // Buscar el usuario por su ID
         $user = User::find($user_id);
-    
+        
         // Verificar si el usuario existe
         if (!$user) {
             // Si el usuario no existe, devuelve un error
             return response()->json(['error' => 'El usuario no existe'], 404);
         }
-    
+        
         // Utiliza Eloquent para buscar todos los tickets asociados al user_id proporcionado
         $tickets = Ticket::where('user_id', $user_id)->get();
     
-        // Retorna los tickets encontrados en formato JSON
+        // Formatear la fecha en cada ticket
+        foreach ($tickets as $ticket) {
+            // Formatear la fecha en el formato deseado
+            $ticket->fecha = Carbon::parse($ticket->fecha)->format('d/m/Y');
+            
+            // Formatear la fecha de atención si está presente
+            if ($ticket->fecha_atencion) {
+                $ticket->fecha_atencion = Carbon::parse($ticket->fecha_atencion)->format('d/m/Y');
+            }
+    
+            // Formatear la fecha de conclusión si está presente
+            if ($ticket->fecha_conclu) {
+                $ticket->fecha_conclu = Carbon::parse($ticket->fecha_conclu)->format('d/m/Y');
+            }
+        }
+    
+        // Retorna los tickets encontrados en formato JSON con fechas formateadas
         return response()->json($tickets);
     }
+    
+    
     
 
     /**
@@ -195,9 +217,20 @@ class TicketController extends Controller
      */
     public function index()
     {
+        // Obtener todos los tickets
         $tickets = Ticket::all();
+    
+        // Formatear la fecha en cada ticket
+        foreach ($tickets as $ticket) {
+            // Convertir la fecha a un objeto Carbon y luego formatearla
+            $ticket->fecha = Carbon::parse($ticket->fecha)->format('d/m/Y');
+            // Puedes ajustar el formato de fecha según tus preferencias
+        }
+    
+        // Retornar la respuesta JSON con los tickets
         return response()->json($tickets);
     }
+    
 
     /**
      * Store a newly created resource in storage.
