@@ -190,20 +190,20 @@ class TicketController extends Controller
         $tickets = Ticket::where('user_id', $user_id)->get();
     
         // Formatear la fecha en cada ticket
-        foreach ($tickets as $ticket) {
-            // Formatear la fecha en el formato deseado
-            $ticket->fecha = Carbon::parse($ticket->fecha)->format('d/m/Y');
+        // foreach ($tickets as $ticket) {
+        //     // Formatear la fecha en el formato deseado
+        //     $ticket->fecha = Carbon::parse($ticket->fecha)->format('d/m/Y');
             
-            // Formatear la fecha de atención si está presente
-            if ($ticket->fecha_atencion) {
-                $ticket->fecha_atencion = Carbon::parse($ticket->fecha_atencion)->format('d/m/Y');
-            }
+        //     // Formatear la fecha de atención si está presente
+        //     if ($ticket->fecha_atencion) {
+        //         $ticket->fecha_atencion = Carbon::parse($ticket->fecha_atencion)->format('d/m/Y');
+        //     }
     
-            // Formatear la fecha de conclusión si está presente
-            if ($ticket->fecha_conclu) {
-                $ticket->fecha_conclu = Carbon::parse($ticket->fecha_conclu)->format('d/m/Y');
-            }
-        }
+        //     // Formatear la fecha de conclusión si está presente
+        //     if ($ticket->fecha_conclu) {
+        //         $ticket->fecha_conclu = Carbon::parse($ticket->fecha_conclu)->format('d/m/Y');
+        //     }
+        // }
     
         // Retorna los tickets encontrados en formato JSON con fechas formateadas
         return response()->json($tickets);
@@ -296,18 +296,18 @@ class TicketController extends Controller
         $ticket->save();
     
         return response()->json($ticket);
-    }
-    
-        
-    
-    
+    }        
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        return "soy show";
+        $datos = Ticket::find($id);
+        if (!$datos) {
+            return response()->json(['message' => 'Registro no encontrado'], 404);
+        }
+        return response()->json($datos);
     }
 
     /**
