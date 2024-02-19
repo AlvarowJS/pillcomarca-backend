@@ -222,9 +222,6 @@ class TicketController extends Controller
     
         // Formatear la fecha en cada ticket
         foreach ($tickets as $ticket) {
-            // Convertir la fecha a un objeto Carbon y luego formatearla
-            $ticket->fecha = Carbon::parse($ticket->fecha)->format('d/m/Y');
-            // Puedes ajustar el formato de fecha según tus preferencias
         }
     
         // Retornar la respuesta JSON con los tickets
