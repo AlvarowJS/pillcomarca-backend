@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Gestiondetalle extends Model
 {
     use HasFactory;
+
+    public function gestion()
+    {
+        return $this->belongsTo(Gestion::class);
+    }
 }

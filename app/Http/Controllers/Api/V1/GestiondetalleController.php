@@ -12,11 +12,12 @@ class GestiondetalleController extends Controller
     /**
      * Display a listing of the resource.
      */
-     public function index()
+    public function index()
     {
-        $datos = Gestiondetalle::all();
+        $datos = Gestiondetalle::with('gestion')->get();
         return response()->json($datos);
     }
+    
 
     /**
      * Store a newly created resource in storage.
