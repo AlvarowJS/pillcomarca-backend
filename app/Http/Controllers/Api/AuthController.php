@@ -107,6 +107,7 @@ class AuthController extends Controller
             $nombres = $user->nombres;
             $apellidos = $user->apellidos;
             $cargo = $user->cargo_id;
+            $dependencia = $user->dependencia_id;
             $token = $user->createToken('api_token')->plainTextToken;
             return response()->json([
                 'api_token' => $token,
@@ -114,6 +115,7 @@ class AuthController extends Controller
                 'nombres' => $nombres,
                 'apellidos' => $apellidos,
                 'cargo' => $cargo,
+                'dependencia' => $dependencia,
                 'user' => $id
             ], 200);
         } else {
