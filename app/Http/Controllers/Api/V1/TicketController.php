@@ -14,6 +14,14 @@ use Carbon\Carbon;
 
 class TicketController extends Controller
 {
+    public function exportarTicket($id)
+    {
+        $tickets = Ticket::with(['user.dependencia', 'user.cargo'])
+            ->where('id', $id)
+            ->first();
+
+        return response()->json($tickets);
+    }
     public function mostrarTicketsActivos()
     {
         // Obtiene todos los tickets que no están marcados como finalizados (estado <> 3)

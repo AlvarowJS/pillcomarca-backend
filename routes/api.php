@@ -109,6 +109,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/v1/tickets-activos', [Ticket::class, 'mostrarTicketsActivos']);
     Route::get('/v1/ticket-orden/{id}', [Ticket::class, 'obtenerPosicion']);
 });
+Route::get('/v1/ticket-exportar/{id}', [Ticket::class, 'exportarTicket']);
 Route::get('/v1/directorios', [Directorio::class, 'index']);
 Route::get('/v1/registro-visitas', [Registro::class, 'index']);
 Route::get('/v1/usuario-publico/{dni}', [UsuarioPublico::class, 'show']);
