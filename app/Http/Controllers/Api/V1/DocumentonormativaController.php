@@ -9,6 +9,7 @@ use App\Http\Resources\V1\DocumentonormativaResource;
 use App\Models\Documentonormativa;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Carbon\Carbon;
 
 class DocumentonormativaController extends Controller
 {
@@ -28,7 +29,7 @@ class DocumentonormativaController extends Controller
     {
         $documento = new Documentonormativa;
         $documento->nombre = $request->nombre;
-        $documento->fecha = $request->fecha;
+        $documento->fecha =Carbon::now()->toDateString();
         $documento->descripcion = $request->descripcion;
         $documento->archivo = $request->archivo;
         $documento->tipodedocumento_id = $request->tipodedocumento_id;
