@@ -18,6 +18,7 @@ class DocumentonormativaResource extends JsonResource
             'type' => 'Documento normativo',
             'id' => (string) $this->resource->getRouteKey(),
             'attributes' => [
+                'id' => (string) $this->resource->getRouteKey(),
                 'nombre' => $this->nombre,
                 'fecha' => $this->fecha,
                 'descripcion' => $this->descripcion,

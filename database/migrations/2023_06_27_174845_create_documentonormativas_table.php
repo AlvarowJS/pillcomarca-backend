@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('documentonormativas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('fecha');
+            $table->date('fecha');
             $table->string('descripcion');
             $table->string('archivo');
             $table->foreignId('tipodedocumento_id')->nullable()->constrained('tipodedocumentos');
