@@ -191,13 +191,14 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::with(['user.dependencia', 'user.cargo']) // Cargar las relaciones del usuario y su dependencia
-            ->orderByRaw('estado = 1 DESC')
+        $tickets = Ticket::with(['user.dependencia', 'user.cargo'])
+            ->orderByRaw('CASE WHEN estado = 1 THEN 1 WHEN estado = 2 THEN 2 ELSE 3 END')
             ->orderBy('fecha', 'desc')
             ->get();
-
+    
         return response()->json($tickets);
     }
+    
 
 
     /**
