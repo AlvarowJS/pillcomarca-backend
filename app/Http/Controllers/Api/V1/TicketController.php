@@ -9,18 +9,23 @@ use App\Models\User;
 use App\Models\Hardware;
 use App\Models\Dependencia;
 use Carbon\Carbon;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class TicketController extends Controller
 {
     public function exportarTicket($id)
     {
-        $tickets = Ticket::with(['user.dependencia', 'user.cargo'])
+        $tickets = Ticket::with(['user.dependencia', 'user.cargo', 'hardware.tipo'])
             ->where('id', $id)
-            ->first();
+            ->first();        
 
-        return response()->json($tickets);
+        $pdf = PDF::loadView('pdf.ticket', compact('tickets'))
+            ->setPaper('a4', 'portrait');
+        
+        return $pdf->download('nombre-del-archivo.pdf');
+
+        // return response()->json($tickets);
     }
     public function mostrarTicketsActivos()
     {
@@ -96,53 +101,26 @@ class TicketController extends Controller
 
     public function obtenerPosicion($user_id)
     {
-        // Convertir el user_id a string
-        $user_id = (string) $user_id;
-
-        // Busca todos los tickets con estado 1 y los ordena por fecha y hora de forma ascendente
-        $ticketsActivos = Ticket::where('estado', 1)
-            ->orderBy('fecha')
-            ->orderBy('hora')
+        $idTickeUser = Ticket::where('user_id', $user_id)
+            ->where('estado', 1)
             ->get();
-
-        // Inicializar la posición del ticket del usuario
-        $posicion = null;
-
-        // Inicializar el estado del ticket del usuario
-        $estadoTicket = null;
-
-        // Iterar sobre los tickets activos para encontrar la posición y el estado del ticket del usuario
-        foreach ($ticketsActivos as $index => $ticket) {
-            // Convertir el user_id del ticket a string para asegurar una comparación correcta
-            $ticket_user_id = (string) $ticket->user_id;
-
-            if ($ticket_user_id === $user_id) {
-                $posicion = $index + 1; // Ajustar el índice base 0 al índice base 1
-                $estadoTicket = $ticket->estado;
-                break;
-            }
-        }
-
-        if ($posicion !== null) {
-            // Si el ticket está en estado 2, el usuario está siendo atendido
-            if ($estadoTicket === 2) {
-                return response()->json(['message' => 'Usted está siendo atendido']);
-            }
-            // Si el ticket está en estado 3, el usuario ya fue atendido
-            elseif ($estadoTicket === 3) {
-                return response()->json(['message' => 'Usted ya fue atendido']);
-            }
-            // Si no, retorna la posición del ticket del usuario y el JSON con solo la orden
-            else {
-                return response()->json([
-                    'message' => 'El ticket del usuario está en posición ' . $posicion,
-                    'orden' => $posicion
-                ]);
-            }
-        } else {
-            // Si no se encuentra el ticket, retorna un mensaje indicando que el usuario no tiene ningún ticket en estado activo
+        if ($idTickeUser->isEmpty()) {
             return response()->json(['message' => 'El usuario no tiene ningún ticket en estado activo'], 404);
         }
+
+        $ticketsActivos = Ticket::where('estado', 1)
+            ->get();
+
+        $arrayIds = [];
+        foreach ($ticketsActivos as $ticketActivo) {
+            $arrayIds[] = $ticketActivo['id'];
+        }
+        $idTickeUser = $idTickeUser[0]->id;
+        $posicion = array_search($idTickeUser, $arrayIds);
+        return response()->json([
+            'message' => 'El ticket del usuario está en posición ' . $posicion + 1,
+            'orden' => $posicion + 1
+        ]);
     }
 
 
@@ -195,10 +173,10 @@ class TicketController extends Controller
             ->orderByRaw('CASE WHEN estado = 1 THEN 1 WHEN estado = 2 THEN 2 ELSE 3 END')
             ->orderBy('fecha', 'desc')
             ->get();
-    
+
         return response()->json($tickets);
     }
-    
+
 
 
     /**

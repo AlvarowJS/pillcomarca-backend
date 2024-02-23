@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('detalle');
+            $table->text('detalle');
             $table->unsignedInteger('estado')->default(1);
             $table->date('fecha');
             $table->date('fecha_atencion')->nullable();
             $table->date('fecha_conclu')->nullable();
-            $table->string('conclusion')->nullable();
+            $table->text('conclusion')->nullable();
             $table->integer('urgencia');
             $table->integer('urgencia_verdad')->nullable();
             $table->time('hora');

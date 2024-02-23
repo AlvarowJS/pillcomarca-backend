@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('ip')->nullable();
             $table->string('marca');
             $table->string('especif')->nullable();
-            $table->string('cod_patri');
+            $table->string('cod_patri')->unique();
             $table->unsignedBigInteger('dependencia_id')->nullable()->constrained('dependencias');
             $table->unsignedBigInteger('tipo_id')->nullable()->constrained('tipos');
             $table->unsignedBigInteger('user_id')->nullable()->constrained('users');

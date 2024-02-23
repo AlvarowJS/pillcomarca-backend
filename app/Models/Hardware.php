@@ -43,6 +43,10 @@ class Hardware extends Model
     {
         return $this->belongsTo(Dependencia::class);
     }
+    public function tipo()
+    {
+        return $this->belongsTo(Tipo::class);
+    }
 
     public function tickets()
     {
