@@ -18,12 +18,12 @@ class TicketController extends Controller
     {
         $tickets = Ticket::with(['user.dependencia', 'user.cargo', 'hardware.tipo'])
             ->where('id', $id)
-            ->first();        
-
+            ->first();
+        $nombrePdf = 'ticket-00' . $tickets->id . '.pdf';
         $pdf = PDF::loadView('pdf.ticket', compact('tickets'))
             ->setPaper('a4', 'portrait');
-        
-        return $pdf->download('nombre-del-archivo.pdf');
+
+        return $pdf->download($nombrePdf);
 
         // return response()->json($tickets);
     }

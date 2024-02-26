@@ -82,7 +82,7 @@ class AuthController extends Controller
             'role_id' => $roleNumber[0]->id,
             'password' => Hash::make($request->password),
             'cargo_id' => $request->cargo_id,
-            'dependencia_id' => $dependencia,
+            'dependencia_id' => $request->dependencia_id,
             'estado' => true
         ]);
         return response()->json([

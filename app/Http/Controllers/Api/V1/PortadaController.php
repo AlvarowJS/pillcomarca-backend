@@ -14,7 +14,9 @@ class PortadaController extends Controller
      */
     public function index()
     {
-        $portadasActivas = Portada::where('estado', true)->get();
+        $portadasActivas = Portada::where('estado', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
         return response()->json($portadasActivas);
     }
 
