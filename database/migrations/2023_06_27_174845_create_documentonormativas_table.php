@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->date('fecha');
-            $table->string('descripcion');
-            $table->string('archivo');
+            $table->text('descripcion');
+            $table->text('archivo');
             $table->foreignId('tipodedocumento_id')->nullable()->constrained('tipodedocumentos');
             $table->timestamps();
         });

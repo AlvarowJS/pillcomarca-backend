@@ -18,7 +18,28 @@ class DocumentonormativaController extends Controller
      */
     public function index()
     {
-        $datos = Documentonormativa::with('Tipodedocumento')->get();
+        // $datos = Documentonormativa::with('Tipodedocumento')
+        //     ->orderBy('fecha', 'desc')
+        //     ->paginate(10);
+        // return DocumentonormativaCollection::make($datos);
+
+        $query = Documentonormativa::with('Tipodedocumento')
+            ->orderBy('fecha', 'desc');
+        
+        if (request()->filled('year')) {
+            $query->whereYear('fecha', request()->input('year'));
+        }        
+
+        if (request()->filled('nombre')) {
+            $query->where('nombre', 'like', '%' . request()->input('nombre') . '%');
+        }
+
+        if (request()->filled('tipodedocumento_id')) {
+            $query->where('tipodedocumento_id', request()->input('tipodedocumento_id'));
+        }
+
+        $datos = $query->paginate(10);
+
         return DocumentonormativaCollection::make($datos);
     }
 
@@ -29,7 +50,7 @@ class DocumentonormativaController extends Controller
     {
         $documento = new Documentonormativa;
         $documento->nombre = $request->nombre;
-        $documento->fecha =Carbon::now()->toDateString();
+        $documento->fecha = Carbon::now()->toDateString();
         $documento->descripcion = $request->descripcion;
         $documento->archivo = $request->archivo;
         $documento->tipodedocumento_id = $request->tipodedocumento_id;

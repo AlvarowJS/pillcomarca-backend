@@ -17,8 +17,19 @@ class DocumentonormativaCollection extends ResourceCollection
         return [
             'data' => $this->collection,
             'links' => [
-                'self' => url('api/v1/documentonormativa')
-            ]
+                'self' => url('api/v1/documentonormativa'),
+                'pagination' => [
+                    'current_page' => $this->currentPage(),
+                    'from' => $this->firstItem(),
+                    'to' => $this->lastItem(),
+                    'total' => $this->total(),
+                    'per_page' => $this->perPage(),
+                    'prev_page' => $this->previousPageUrl(),
+                    'next_page' => $this->nextPageUrl(),
+                    'last_page' => $this->lastPage(),
+                ]
+            ],
+           
         ];
     }
 }
