@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\HardwareResource;
 use App\Models\Hardware;
 use App\Models\Dependencia;
 use App\Models\Tipo;
 use Illuminate\Http\Request;
+
 
 class HardwareController extends Controller
 {
@@ -29,8 +31,11 @@ class HardwareController extends Controller
      */
     public function index()
     {
-        $datos = Hardware::all();
-        return response()->json($datos);
+        // Obtener todos los registros de hardware
+        $hardwares = Hardware::all();
+        
+        // Transformar los datos utilizando el recurso de hardware
+        return HardwareResource::collection($hardwares);
     }
 
     /**
@@ -52,21 +57,24 @@ class HardwareController extends Controller
         }
     
         // Si la dependencia existe, crea la Hardware
-        $Hardware = new Hardware();
-        $Hardware->tipo_id = $request->tipo_id;
-        $Hardware->procesador = $request->procesador;
-        $Hardware->ram = $request->ram;
-        $Hardware->almacenamiento = $request->almacenamiento;
-        $Hardware->tipo_alma = $request->tipo_alma;
-        $Hardware->ip = $request->ip;
-        $Hardware->marca = $request->marca;
-        $Hardware->especif = $request->especif;
-        $Hardware->cod_patri = $request->cod_patri;
-        $Hardware->dependencia_id = $request->dependencia_id;
-        $Hardware->save();
+        $hardware = new Hardware();
+        $hardware->tipo_id = $request->tipo_id;
+        $hardware->procesador = $request->procesador;
+        $hardware->ram = $request->ram;
+        $hardware->almacenamiento = $request->almacenamiento;
+        $hardware->tipo_alma = $request->tipo_alma;
+        $hardware->ip = $request->ip;
+        $hardware->marca = $request->marca;
+        $hardware->especif = $request->especif;
+        $hardware->cod_patri = $request->cod_patri;
+        $hardware->dependencia_id = $request->dependencia_id;
+        $hardware->save();
     
-        return response()->json($Hardware);
+        // Devolver la nueva hardware utilizando el recurso de hardware
+        return new HardwareResource($hardware);
     }
+
+
 
     /**
      * Display the specified resource.
