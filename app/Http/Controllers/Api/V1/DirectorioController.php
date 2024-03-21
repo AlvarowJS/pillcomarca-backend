@@ -28,7 +28,7 @@ class DirectorioController extends Controller
         $perPage = \Request::query('perPage', 9);
         // $datos = Directorio::paginate($perPage);
 
-        $datos = Directorio::whereIn('cargo', ['gerente', 'Sub Gerente'])
+        $datos = Directorio::whereIn('cargo', ['Gerente', 'Sub Gerente'])
                    ->orderBy('cargo')
                    ->paginate($perPage);
 
