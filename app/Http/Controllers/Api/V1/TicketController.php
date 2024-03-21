@@ -250,7 +250,7 @@ class TicketController extends Controller
      */
     public function show(string $id)
     {
-        $datos = Ticket::find($id);
+        $datos = Ticket::with('user')->find($id);
         if (!$datos) {
             return response()->json(['message' => 'Registro no encontrado'], 404);
         }

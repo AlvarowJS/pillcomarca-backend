@@ -59,7 +59,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/v1/gestiondetalle', Gestiondetalle::class);
     Route::apiResource('/v1/tipodedocumento', Tipodedocumento::class);
     Route::apiResource('/v1/documentonormativa', Documentonormativa::class);        
-
+    Route::get('/v1/documentonormativa-simple', [Documentonormativa::class, 'mostrarNormativas']);
+    
     // Rutas para portadas
     Route::apiResource('/v1/portada', Portada::class);
     Route::post('/v1/portada-update', [Portada::class, 'update_foto']);
@@ -111,6 +112,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::get('/v1/ticket-exportar/{id}', [Ticket::class, 'exportarTicket']);
 Route::get('/v1/directorios', [Directorio::class, 'index']);
+Route::get('/v1/directorios-regidor', [Directorio::class, 'mostrarRegidor']);
 Route::get('/v1/registro-visitas', [Registro::class, 'index']);
 Route::get('/v1/usuario-publico/{dni}', [UsuarioPublico::class, 'show']);
 Route::get('/v1/registro', [Registro::class, 'index']);
@@ -123,5 +125,6 @@ Route::get('/v1/convocatoria', [Convocatoria::class, 'index']);
 Route::get('/v1/gestion', [Gestion::class, 'index']);
 Route::get('/v1/tipodedocumento', [Tipodedocumento::class, 'index']);
 Route::get('/v1/documentonormativa', [Documentonormativa::class, 'index']);
+
 Route::get('/v1/documentonormativa/{documentonormativa}', [Documentonormativa::class, 'show']);
 Route::get('/v1/portada', [Portada::class, 'index']);

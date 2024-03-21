@@ -13,6 +13,15 @@ use Carbon\Carbon;
 
 class DocumentonormativaController extends Controller
 {
+    public function mostrarNormativas()
+    {
+        $datos = Documentonormativa::with('Tipodedocumento')
+        ->orderBy('fecha', 'desc')
+        ->get();
+        
+        return response()->json($datos);
+
+    }
     /**
      * Display a listing of the resource.
      */

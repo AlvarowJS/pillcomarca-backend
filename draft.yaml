@@ -106,6 +106,45 @@ models:
   #     hasMany: Ticket
 
 
+  # Tipo:
+  #   nombre: string
+  #   relationships:
+  #     hasMany: Hardware
+
+  PaginaCategoria:
+    nombre: string
+    fecha: date
+    foto: text
+    descripcion: text    
+    dependencia_id: id
+
+  PaginaTipo:
+    nombre: string
+    fecha: date
+    
+  PaginaArchivo:
+    nombre: string
+    fecha: date
+    link: text
+    relationships:
+      hasMany: 
+
+  PaginaEtapa:
+    nombre: string
+    fecha: date    
+    relationships:
+      hasMany: 
+
+  Tipo:
+    nombre: string
+    relationships:
+      hasMany: Hardware
+
+  Tipo:
+    nombre: string
+    relationships:
+      hasMany: Hardware
+
   Tipo:
     nombre: string
     relationships:

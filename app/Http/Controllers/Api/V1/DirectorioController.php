@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class DirectorioController extends Controller
 {
+    public function mostrarRegidor()
+    {
+        $datos = Directorio::where('cargo', 'Regidor')
+                   ->get();
+
+        return response()->json($datos);
+    }
     public function indexSimple()
     {
         $directorio = Directorio::all();
@@ -19,7 +26,12 @@ class DirectorioController extends Controller
     public function index()
     {
         $perPage = \Request::query('perPage', 9);
-        $datos = Directorio::paginate($perPage);
+        // $datos = Directorio::paginate($perPage);
+
+        $datos = Directorio::whereIn('cargo', ['gerente', 'Sub Gerente'])
+                   ->orderBy('cargo')
+                   ->paginate($perPage);
+
         return response()->json($datos);
     }
 
