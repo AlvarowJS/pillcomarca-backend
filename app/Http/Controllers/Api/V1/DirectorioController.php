@@ -29,7 +29,7 @@ class DirectorioController extends Controller
         // $datos = Directorio::paginate($perPage);
 
         $datos = Directorio::whereIn('cargo', ['Gerente', 'Sub Gerente'])
-                   ->orderBy('cargo')
+                //    ->orderBy('cargo')
                    ->paginate($perPage);
 
         return response()->json($datos);
